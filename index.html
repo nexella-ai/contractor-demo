@@ -918,6 +918,12 @@
             }
         }
 
+        // Hide editor by default, only show with ?edit=true
+if (!window.location.search.includes('edit=true')) {
+    document.getElementById('editForm').style.display = 'none';
+    document.getElementById('showEditorBtn').style.display = 'none';
+}
+
         // Initialize scripts on page load
         document.addEventListener('DOMContentLoaded', function() {
             initializeSite();
