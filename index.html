@@ -889,70 +889,67 @@
         }
 
         function updateTextContent(company, phone, email, location) {
-            // Update all text content that contains placeholders
-            const walker = document.createTreeWalker(
-                document.body,
-                NodeFilter.SHOW_TEXT,
-                null,
-                false
-            );
-
-            const textNodes = [];
-            let node;
-            while (node = walker.nextNode()) {
-                textNodes.push(node);
-            }
-
-            // Replace placeholders in all text nodes
-            textNodes.forEach(textNode => {
-                let text = textNode.textContent;
-                let changed = false;
-
-                if (text.includes('{{COMPANY_NAME}}')) {
-                    text = text.replace(/\{\{COMPANY_NAME\}\}/g, company);
-                    changed = true;
-                }
-                if (text.includes('{{PHONE}}')) {
-                    text = text.replace(/\{\{PHONE\}\}/g, phone);
-                    changed = true;
-                }
-                if (text.includes('{{EMAIL}}')) {
-                    text = text.replace(/\{\{EMAIL\}\}/g, email);
-                    changed = true;
-                }
-                if (text.includes('{{LOCATION}}')) {
-                    text = text.replace(/\{\{LOCATION\}\}/g, location);
-                    changed = true;
-                }
-
-                if (changed) {
-                    textNode.textContent = text;
-                }
-            });
-
-            // Update specific elements with href attributes
-            const phoneLinks = document.querySelectorAll('a[href*="{{PHONE}}"], a[href*="+505-544-1611"]');
-            phoneLinks.forEach(link => {
-                link.href = `tel:${phone}`;
-                if (link.textContent.includes('{{PHONE}}') || link.textContent.includes('+505-544-1611')) {
-                    link.textContent = link.textContent.replace(/\{\{PHONE\}\}|\+505-544-1611/g, phone);
-                }
-            });
-
-            const emailLinks = document.querySelectorAll('a[href*="{{EMAIL}}"], a[href*="suns.constructionllc@gmail.com"]');
-            emailLinks.forEach(link => {
-                link.href = `mailto:${email}`;
-                if (link.textContent.includes('{{EMAIL}}') || link.textContent.includes('suns.constructionllc@gmail.com')) {
-                    link.textContent = link.textContent.replace(/\{\{EMAIL\}\}|suns\.constructionllc@gmail\.com/g, email);
-                }
-            });
-
+            console.log('Starting text update with:', { company, phone, email, location });
+            
+            // Simple and reliable method - update innerHTML with global replace
+            let bodyHTML = document.body.innerHTML;
+            
+            // Replace all placeholders
+            bodyHTML = bodyHTML.replace(/\{\{COMPANY_NAME\}\}/g, company);
+            bodyHTML = bodyHTML.replace(/\{\{PHONE\}\}/g, phone);
+            bodyHTML = bodyHTML.replace(/\{\{EMAIL\}\}/g, email);
+            bodyHTML = bodyHTML.replace(/\{\{LOCATION\}\}/g, location);
+            
+            // Also replace any remaining default values
+            bodyHTML = bodyHTML.replace(/Suns Construction/g, company);
+            bodyHTML = bodyHTML.replace(/\+505-544-1611/g, phone);
+            bodyHTML = bodyHTML.replace(/suns\.constructionllc@gmail\.com/g, email);
+            bodyHTML = bodyHTML.replace(/Albuquerque, New Mexico/g, location);
+            bodyHTML = bodyHTML.replace(/ALBUQUERQUE/g, location.split(',')[0].toUpperCase());
+            
+            // Update the body
+            document.body.innerHTML = bodyHTML;
+            
             // Update page title
-            if (document.title.includes('{{COMPANY_NAME}}') || document.title.includes('{{LOCATION}}')) {
-                document.title = `${company} | Roofing & Construction Services in ${location}`;
+            document.title = `${company} | Roofing & Construction Services in ${location}`;
+            
+            console.log('Text content updated successfully');
+            
+            // Re-attach event listeners after innerHTML change
+            setTimeout(() => {
+                attachEventListeners();
+            }, 100);
+        }
+        
+        function attachEventListeners() {
+            // Re-attach mobile menu listener
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            if (mobileMenuButton) {
+                mobileMenuButton.addEventListener('click', function() {
+                    const menu = document.getElementById('mobile-menu');
+                    if (menu) menu.classList.toggle('hidden');
+                });
             }
-
-            console.log('Text content updated:', { company, phone, email, location });
+            
+            // Re-attach logo listeners
+            const logoUpload = document.getElementById('logoUpload');
+            const logoUrl = document.getElementById('logoUrl');
+            const hideLogo = document.getElementById('hideLogo');
+            
+            if (logoUpload) {
+                logoUpload.addEventListener('change', handleLogoUpload);
+            }
+            if (logoUrl) {
+                logoUrl.addEventListener('input', function() {
+                    applyLogo(this.value);
+                });
+            }
+            if (hideLogo) {
+                hideLogo.addEventListener('change', function() {
+                    const logoUrlValue = document.getElementById('logoUrl').value || '';
+                    applyLogo(logoUrlValue);
+                });
+            }
         }
 
         function applyColorScheme(accent, bg, text, sectionBg) {
