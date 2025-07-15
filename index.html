@@ -1,4 +1,107 @@
-<!DOCTYPE html>
+        // GitHub API functions
+        async function saveToGitHub() {
+            const token = document.getElementById('githubToken').value;
+            const repo = document.getElementById('githubRepo').value;
+            
+            if (!token || !repo) {
+                alert('Please enter your GitHub token and repository name first!');
+                return;
+            }
+
+            try {
+                // Show loading state
+                const saveBtn = event.target;
+                const originalText = saveBtn.textContent;
+                saveBtn.textContent = 'Saving...';
+                saveBtn.disabled = true;
+
+                // Get current page HTML
+                const currentHTML = document.documentElement.outerHTML;
+                
+                // Clean up the HTML (remove editor if showing)
+                const cleanHTML = cleanHTMLForSaving(currentHTML);
+                
+                // Get current file info from GitHub
+                const fileResponse = await fetch(`https://api.github.com/repos/${repo}/contents/index.html`, {
+                    headers: {
+                        'Authorization': `token ${token}`,
+                        'Accept': 'application/vnd.github.v3+json'
+                    }
+                });
+                
+                let sha = '';
+                if (fileResponse.ok) {
+                    const fileData = await fileResponse.json();
+                    sha = fileData.sha;
+                }
+                
+                // Update the file
+                const updateResponse = await fetch(`https://api.github.com/repos/${repo}/contents/index.html`, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `token ${token}`,
+                        'Accept': 'application/vnd.github.v3+json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        message: 'Update website content',
+                        content: btoa(unescape(encodeURIComponent(cleanHTML))),
+                        sha: sha
+                    })
+                });
+                
+                if (updateResponse.ok) {
+                    alert('✅ Saved to GitHub! Changes will be live in 2-3 minutes.');
+                } else {
+                    const error = await updateResponse.json();
+                    alert('❌ Error saving: ' + error.message);
+                }
+                
+                // Restore button state
+                saveBtn.textContent = originalText;
+                saveBtn.disabled = false;
+                
+            } catch (error) {
+                alert('❌ Error: ' + error.message);
+                event.target.textContent = 'Save to GitHub';
+                event.target.disabled = false;
+            }
+        }
+
+        function cleanHTMLForSaving(html) {
+            // Create a temporary DOM to clean up
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = html;
+            
+            // Remove or hide the editor for the saved version
+            const editForm = tempDiv.querySelector('#editForm');
+            const showBtn = tempDiv.querySelector('#showEditorBtn');
+            
+            if (editForm) {
+                editForm.style.display = 'none';
+            }
+            if (showBtn) {
+                showBtn.style.display = 'none';
+            }
+            
+            // Add the URL parameter check to hide editor by default
+            const script = tempDiv.querySelector('script:last-of-type');
+            if (script) {
+                script.textContent = script.textContent.replace(
+                    'document.addEventListener(\'DOMContentLoaded\', function() {',
+                    `document.addEventListener('DOMContentLoaded', function() {
+                        // Hide editor by default, only show with ?edit=true
+                        if (!window.location.search.includes('edit=true')) {
+                            const editForm = document.getElementById('editForm');
+                            const showBtn = document.getElementById('showEditorBtn');
+                            if (editForm) editForm.style.display = 'none';
+                            if (showBtn) showBtn.style.display = 'none';
+                        }`
+                );
+            }
+            
+            return tempDiv.innerHTML;
+        }<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -168,6 +271,20 @@
             </div>
         </div>
 
+        <!-- GitHub Settings -->
+        <div style="margin-bottom: 16px; border-top: 1px solid #6b7280; padding-top: 12px;">
+            <h4 style="color: #D4AF37; font-size: 14px; margin: 0 0 8px 0;">GitHub Settings</h4>
+            <label style="color: white; font-size: 12px;">GitHub Token:</label>
+            <input type="password" id="githubToken" placeholder="ghp_xxxxxxxxxxxx" style="width: 100%; padding: 8px; margin: 4px 0 8px 0; background: #374151; border: 1px solid #6b7280; border-radius: 4px; color: white; font-size: 12px;">
+            
+            <label style="color: white; font-size: 12px;">Repository (username/repo-name):</label>
+            <input type="text" id="githubRepo" value="nexella-ai/contractor-demo" style="width: 100%; padding: 8px; margin: 4px 0 8px 0; background: #374151; border: 1px solid #6b7280; border-radius: 4px; color: white; font-size: 12px;">
+            
+            <div style="font-size: 10px; color: #9ca3af; margin-top: 4px;">
+                Need a token? Go to GitHub Settings → Developer settings → Personal access tokens → Generate new token (classic) → Check "repo" permissions
+            </div>
+        </div>
+
         <!-- Quick Color Presets -->
         <div style="margin-bottom: 16px;">
             <h4 style="color: #D4AF37; font-size: 14px; margin: 0 0 8px 0;">Quick Presets</h4>
@@ -182,6 +299,7 @@
         </div>
         
         <button class="update-btn" onclick="updateSite()">Update Site</button>
+        <button class="update-btn" onclick="saveToGitHub()" style="background: #16a34a; margin-left: 4px;">Save to GitHub</button>
         <button class="hide-btn" onclick="hideEditor()">Hide</button>
     </div>
 
@@ -917,12 +1035,6 @@
                 });
             }
         }
-
-        // Hide editor by default, only show with ?edit=true
-if (!window.location.search.includes('edit=true')) {
-    document.getElementById('editForm').style.display = 'none';
-    document.getElementById('showEditorBtn').style.display = 'none';
-}
 
         // Initialize scripts on page load
         document.addEventListener('DOMContentLoaded', function() {
