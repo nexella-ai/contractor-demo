@@ -382,7 +382,7 @@
             </div>
 
             <!-- Other Images -->
-            <div style="padding: 8px; background: #374151; border-radius: 4px;">
+            <div style="margin-bottom: 12px; padding: 8px; background: #374151; border-radius: 4px;">
                 <label style="color: white; font-size: 12px; font-weight: bold;">Other Images:</label>
                 <div style="margin-bottom: 8px;">
                     <label style="font-size: 11px; color: #9ca3af;">Process Section:</label>
@@ -401,6 +401,43 @@
                     <input type="text" id="financeImage" placeholder="Finance image URL" style="margin-bottom: 4px;">
                 </div>
                 <button onclick="updateOtherImages()" style="background: #16a34a; color: white; padding: 4px 8px; border: none; border-radius: 4px; font-size: 11px; cursor: pointer; width: 100%;">Update Other Images</button>
+            </div>
+
+            <!-- Certifications/Brands -->
+            <div style="margin-top: 12px; padding: 8px; background: #374151; border-radius: 4px;">
+                <label style="color: white; font-size: 12px; font-weight: bold;">Certifications & Brands (6 logos):</label>
+                <div style="font-size: 10px; color: #9ca3af; margin-bottom: 4px;">
+                    Add your certifications: GAF, Owens Corning, BBB, etc.
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-bottom: 4px;">
+                    <input type="text" id="cert1" placeholder="Certification 1 URL" style="font-size: 11px;">
+                    <input type="text" id="cert2" placeholder="Certification 2 URL" style="font-size: 11px;">
+                    <input type="text" id="cert3" placeholder="Certification 3 URL" style="font-size: 11px;">
+                    <input type="text" id="cert4" placeholder="Certification 4 URL" style="font-size: 11px;">
+                    <input type="text" id="cert5" placeholder="Certification 5 URL" style="font-size: 11px;">
+                    <input type="text" id="cert6" placeholder="Certification 6 URL" style="font-size: 11px;">
+                </div>
+                <button onclick="updateCertifications()" style="background: #16a34a; color: white; padding: 4px 8px; border: none; border-radius: 4px; font-size: 11px; cursor: pointer; width: 100%;">Update Certifications</button>
+            </div>
+
+            <!-- Emergency Section Badges -->
+            <div style="margin-top: 12px; padding: 8px; background: #374151; border-radius: 4px;">
+                <label style="color: white; font-size: 12px; font-weight: bold;">Emergency Section Badges:</label>
+                <div style="font-size: 10px; color: #9ca3af; margin-bottom: 4px;">
+                    Logo and trust badges in emergency section
+                </div>
+                <input type="text" id="emergLogo" placeholder="Your logo URL" style="margin-bottom: 2px; font-size: 11px;">
+                <input type="text" id="emergBadge1" placeholder="Trust badge 1 (e.g., 5 stars)" style="margin-bottom: 2px; font-size: 11px;">
+                <input type="text" id="emergBadge2" placeholder="Trust badge 2 (e.g., reviews)" style="margin-bottom: 4px; font-size: 11px;">
+                <button onclick="updateEmergencyBadges()" style="background: #16a34a; color: white; padding: 4px 8px; border: none; border-radius: 4px; font-size: 11px; cursor: pointer; width: 100%;">Update Emergency Badges</button>
+            </div>
+
+            <!-- Finance Section Badges -->
+            <div style="margin-top: 12px; padding: 8px; background: #374151; border-radius: 4px;">
+                <label style="color: white; font-size: 12px; font-weight: bold;">Finance Partner Logos:</label>
+                <input type="text" id="financeLogo1" placeholder="Finance partner 1 logo URL" style="margin-bottom: 2px; font-size: 11px;">
+                <input type="text" id="financeLogo2" placeholder="Finance partner 2 logo URL" style="margin-bottom: 4px; font-size: 11px;">
+                <button onclick="updateFinanceLogos()" style="background: #16a34a; color: white; padding: 4px 8px; border: none; border-radius: 4px; font-size: 11px; cursor: pointer; width: 100%;">Update Finance Logos</button>
             </div>
         </div>
 
@@ -1852,6 +1889,74 @@
         function showEditor() {
             document.getElementById('editForm').style.display = 'block';
             document.getElementById('showEditorBtn').style.display = 'none';
+        }
+
+        function updateCertifications() {
+            const certUrls = [
+                document.getElementById('cert1').value,
+                document.getElementById('cert2').value,
+                document.getElementById('cert3').value,
+                document.getElementById('cert4').value,
+                document.getElementById('cert5').value,
+                document.getElementById('cert6').value
+            ];
+            
+            const certSection = document.querySelector('.py-16.bg-white');
+            if (certSection) {
+                const certImages = certSection.querySelectorAll('img');
+                certUrls.forEach((url, index) => {
+                    if (url && certImages[index]) {
+                        certImages[index].src = url;
+                        certImages[index].alt = `Certification ${index + 1}`;
+                    }
+                });
+                
+                if (certUrls.some(url => url)) {
+                    alert('Certifications updated!');
+                }
+            } else {
+                alert('Certification section not found');
+            }
+        }
+
+        function updateEmergencyBadges() {
+            const emergLogo = document.getElementById('emergLogo').value;
+            const badge1 = document.getElementById('emergBadge1').value;
+            const badge2 = document.getElementById('emergBadge2').value;
+            
+            const emergSection = document.querySelector('#emergency');
+            if (emergSection) {
+                const badges = emergSection.querySelectorAll('.flex.items-center.gap-4.mb-8 img');
+                
+                if (emergLogo && badges[0]) badges[0].src = emergLogo;
+                if (badge1 && badges[1]) badges[1].src = badge1;
+                if (badge2 && badges[2]) badges[2].src = badge2;
+                
+                if (emergLogo || badge1 || badge2) {
+                    alert('Emergency badges updated!');
+                } else {
+                    alert('Please provide at least one badge URL');
+                }
+            }
+        }
+
+        function updateFinanceLogos() {
+            const logo1 = document.getElementById('financeLogo1').value;
+            const logo2 = document.getElementById('financeLogo2').value;
+            
+            const financeSection = document.querySelector('.py-20.bg-gray-100.relative');
+            if (financeSection) {
+                const logos = financeSection.querySelectorAll('.flex.gap-4 img');
+                
+                if (logo1 && logos[0]) logos[0].src = logo1;
+                if (logo2 && logos[1]) logos[1].src = logo2;
+                
+                if (logo1 || logo2) {
+                    alert('Finance logos updated!');
+                } else {
+                    alert('Please provide at least one logo URL');
+                }
+            }
         }
 
         // Initialize scripts on page load
