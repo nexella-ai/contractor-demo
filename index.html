@@ -1,11 +1,22 @@
-<html lang="en"><head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ABC ROOFS | Roofing &amp; Construction Services in Surprise, Arizona</title>
+    <title>ABC ROOFS | Professional Roofing Services in Surprise, Arizona</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+        
+        :root {
+            --primary-color: #3fc138;
+            --primary-dark: #2d8e29;
+            --surface-container: #1a1a1a;
+            --surface-container-high: #252525;
+            --surface-container-lowest: #0a0a0a;
+        }
         
         body {
             font-family: 'Poppins', sans-serif;
@@ -14,41 +25,155 @@
             scroll-behavior: smooth;
         }
         
-        .gold-text {
-            color: #D4AF37;
+        .primary-text {
+            color: var(--primary-color);
         }
         
-        .gold-border {
-            border-color: #D4AF37;
+        .primary-bg {
+            background-color: var(--primary-color);
         }
         
-        .gold-bg {
-            background-color: #D4AF37;
+        .primary-border {
+            border-color: var(--primary-color);
+        }
+        
+        .bg-surface-container {
+            background-color: var(--surface-container);
+        }
+        
+        .bg-surface-container-high {
+            background-color: var(--surface-container-high);
+        }
+        
+        .bg-surface-container-lowest {
+            background-color: var(--surface-container-lowest);
         }
         
         .hero {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://source.unsplash.com/1920x1080/?roofing,construction');
             background-size: cover;
             background-position: center;
-            min-height: 80vh;
+            min-height: 60vh;
+        }
+        
+        .service-card {
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
         }
         
         .service-card:hover {
             transform: translateY(-10px);
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 30px rgba(63, 193, 56, 0.3);
+        }
+
+        .service-card:hover .service-description {
+            max-height: 200px;
+            opacity: 1;
+        }
+
+        .service-description {
+            max-height: 0;
+            opacity: 0;
             transition: all 0.3s ease;
+            overflow: hidden;
         }
         
-        .nav-link:hover {
-            color: #D4AF37 !important;
-        }
-        
-        .btn-gold:hover {
-            background-color: #c5a227;
+        .slanted-rectangle {
+            clip-path: polygon(5% 0%, 100% 0%, 95% 100%, 0% 100%);
         }
         
         .testimonial-card {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
+        }
+        
+        .divider-triangle {
+            height: 80px;
+            background: linear-gradient(to bottom right, transparent 49.5%, var(--surface-container) 50%);
+        }
+        
+        .divider-triangle-reverse {
+            background: linear-gradient(to bottom left, transparent 49.5%, var(--surface-container) 50%);
+        }
+
+        /* Material Design Button */
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: black;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: scale(1.05);
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .btn-primary:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        /* Service card image hover effect */
+        .service-card-img {
+            transition: transform 0.3s ease;
+        }
+        
+        .service-card:hover .service-card-img {
+            transform: scale(1.1);
+        }
+
+        /* Process section */
+        .process-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .process-card:hover {
+            background: rgba(63, 193, 56, 0.1);
+            transform: translateX(10px);
+        }
+
+        /* Mini gallery scroll */
+        .scroll-container {
+            display: flex;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        
+        .scroll-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Counter animation */
+        @keyframes countUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .counter {
+            animation: countUp 1s ease-out;
         }
 
         /* Editor Styles */
@@ -57,7 +182,7 @@
             top: 10px;
             right: 10px;
             background: #1f2937;
-            border: 2px solid #D4AF37;
+            border: 2px solid var(--primary-color);
             border-radius: 8px;
             padding: 16px;
             z-index: 9999;
@@ -67,7 +192,10 @@
             overflow-y: auto;
         }
 
-        #editForm input[type="text"], #editForm input[type="color"], #editForm input[type="password"], #editForm input[type="file"] {
+        #editForm input[type="text"], 
+        #editForm input[type="color"], 
+        #editForm input[type="password"], 
+        #editForm input[type="file"] {
             width: 100%;
             padding: 8px;
             margin: 4px 0 8px 0;
@@ -89,7 +217,7 @@
         }
 
         .update-btn {
-            background: #D4AF37;
+            background: var(--primary-color);
             color: black;
         }
 
@@ -102,7 +230,7 @@
             position: fixed;
             top: 10px;
             right: 10px;
-            background: #D4AF37;
+            background: var(--primary-color);
             color: black;
             border: none;
             padding: 8px 12px;
@@ -112,74 +240,53 @@
             z-index: 9998;
             display: none;
         }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-fadeInUp {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
     </style>
-<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.16 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.fixed{position:fixed}.bottom-6{bottom:1.5rem}.right-6{right:1.5rem}.z-50{z-index:50}.mx-auto{margin-left:auto;margin-right:auto}.mb-1{margin-bottom:0.25rem}.mb-10{margin-bottom:2.5rem}.mb-16{margin-bottom:4rem}.mb-4{margin-bottom:1rem}.mb-6{margin-bottom:1.5rem}.mb-8{margin-bottom:2rem}.ml-4{margin-left:1rem}.mr-2{margin-right:0.5rem}.mr-3{margin-right:0.75rem}.mr-4{margin-right:1rem}.mt-1{margin-top:0.25rem}.mt-10{margin-top:2.5rem}.mt-12{margin-top:3rem}.block{display:block}.flex{display:flex}.grid{display:grid}.hidden{display:none}.h-1{height:0.25rem}.h-10{height:2.5rem}.h-12{height:3rem}.h-16{height:4rem}.h-20{height:5rem}.h-64{height:16rem}.h-8{height:2rem}.h-full{height:100%}.w-12{width:3rem}.w-16{width:4rem}.w-20{width:5rem}.w-8{width:2rem}.w-full{width:100%}.max-w-3xl{max-width:48rem}.max-w-7xl{max-width:80rem}.flex-shrink-0{flex-shrink:0}.grid-cols-1{grid-template-columns:repeat(1, minmax(0, 1fr))}.flex-col{flex-direction:column}.items-start{align-items:flex-start}.items-center{align-items:center}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-10{gap:2.5rem}.gap-4{gap:1rem}.gap-6{gap:1.5rem}.gap-8{gap:2rem}.space-x-4 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(1rem * var(--tw-space-x-reverse));margin-left:calc(1rem * calc(1 - var(--tw-space-x-reverse)))}.space-x-6 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(1.5rem * var(--tw-space-x-reverse));margin-left:calc(1.5rem * calc(1 - var(--tw-space-x-reverse)))}.space-y-1 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.25rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.25rem * var(--tw-space-y-reverse))}.space-y-2 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.5rem * var(--tw-space-y-reverse))}.space-y-4 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem * var(--tw-space-y-reverse))}.space-y-6 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.5rem * var(--tw-space-y-reverse))}.overflow-hidden{overflow:hidden}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:0.5rem}.rounded-md{border-radius:0.375rem}.border{border-width:1px}.border-2{border-width:2px}.border-b{border-bottom-width:1px}.border-t{border-top-width:1px}.border-gray-700{--tw-border-opacity:1;border-color:rgb(55 65 81 / var(--tw-border-opacity, 1))}.border-gray-800{--tw-border-opacity:1;border-color:rgb(31 41 55 / var(--tw-border-opacity, 1))}.border-white{--tw-border-opacity:1;border-color:rgb(255 255 255 / var(--tw-border-opacity, 1))}.bg-black{--tw-bg-opacity:1;background-color:rgb(0 0 0 / var(--tw-bg-opacity, 1))}.bg-gray-700{--tw-bg-opacity:1;background-color:rgb(55 65 81 / var(--tw-bg-opacity, 1))}.bg-gray-800{--tw-bg-opacity:1;background-color:rgb(31 41 55 / var(--tw-bg-opacity, 1))}.bg-gray-900{--tw-bg-opacity:1;background-color:rgb(17 24 39 / var(--tw-bg-opacity, 1))}.bg-transparent{background-color:transparent}.bg-yellow-700{--tw-bg-opacity:1;background-color:rgb(161 98 7 / var(--tw-bg-opacity, 1))}.object-cover{object-fit:cover}.p-4{padding:1rem}.p-6{padding:1.5rem}.p-8{padding:2rem}.px-2{padding-left:0.5rem;padding-right:0.5rem}.px-3{padding-left:0.75rem;padding-right:0.75rem}.px-4{padding-left:1rem;padding-right:1rem}.px-8{padding-left:2rem;padding-right:2rem}.py-12{padding-top:3rem;padding-bottom:3rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.py-20{padding-top:5rem;padding-bottom:5rem}.py-3{padding-top:0.75rem;padding-bottom:0.75rem}.pb-3{padding-bottom:0.75rem}.pt-2{padding-top:0.5rem}.pt-20{padding-top:5rem}.pt-8{padding-top:2rem}.text-center{text-align:center}.text-2xl{font-size:1.5rem;line-height:2rem}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-4xl{font-size:2.25rem;line-height:2.5rem}.text-base{font-size:1rem;line-height:1.5rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.font-bold{font-weight:700}.font-medium{font-weight:500}.italic{font-style:italic}.text-black{--tw-text-opacity:1;color:rgb(0 0 0 / var(--tw-text-opacity, 1))}.text-gray-300{--tw-text-opacity:1;color:rgb(209 213 219 / var(--tw-text-opacity, 1))}.text-gray-400{--tw-text-opacity:1;color:rgb(156 163 175 / var(--tw-text-opacity, 1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.text-yellow-500{--tw-text-opacity:1;color:rgb(234 179 8 / var(--tw-text-opacity, 1))}.shadow-lg{--tw-shadow:0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-xl{--tw-shadow:0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.transition{transition-property:color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.duration-300{transition-duration:300ms}.hover\:bg-gray-800:hover{--tw-bg-opacity:1;background-color:rgb(31 41 55 / var(--tw-bg-opacity, 1))}.hover\:bg-gray-900:hover{--tw-bg-opacity:1;background-color:rgb(17 24 39 / var(--tw-bg-opacity, 1))}.hover\:bg-yellow-600:hover{--tw-bg-opacity:1;background-color:rgb(202 138 4 / var(--tw-bg-opacity, 1))}.hover\:bg-yellow-700:hover{--tw-bg-opacity:1;background-color:rgb(161 98 7 / var(--tw-bg-opacity, 1))}.hover\:text-gray-300:hover{--tw-text-opacity:1;color:rgb(209 213 219 / var(--tw-text-opacity, 1))}.hover\:text-white:hover{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.hover\:underline:hover{-webkit-text-decoration-line:underline;text-decoration-line:underline}.focus\:outline-none:focus{outline:2px solid transparent;outline-offset:2px}.focus\:ring-2:focus{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)}.focus\:ring-yellow-500:focus{--tw-ring-opacity:1;--tw-ring-color:rgb(234 179 8 / var(--tw-ring-opacity, 1))}@media (min-width: 640px){.sm\:flex-row{flex-direction:row}.sm\:px-3{padding-left:0.75rem;padding-right:0.75rem}.sm\:px-6{padding-left:1.5rem;padding-right:1.5rem}}@media (min-width: 768px){.md\:col-span-2{grid-column:span 2 / span 2}.md\:mb-0{margin-bottom:0px}.md\:flex{display:flex}.md\:hidden{display:none}.md\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.md\:grid-cols-4{grid-template-columns:repeat(4, minmax(0, 1fr))}.md\:flex-row{flex-direction:row}.md\:items-center{align-items:center}.md\:space-x-8 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(2rem * var(--tw-space-x-reverse));margin-left:calc(2rem * calc(1 - var(--tw-space-x-reverse)))}.md\:text-2xl{font-size:1.5rem;line-height:2rem}.md\:text-4xl{font-size:2.25rem;line-height:2.5rem}.md\:text-6xl{font-size:3.75rem;line-height:1}}@media (min-width: 1024px){.lg\:mb-0{margin-bottom:0px}.lg\:w-1\/2{width:50%}.lg\:grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}.lg\:flex-row{flex-direction:row}.lg\:px-8{padding-left:2rem;padding-right:2rem}.lg\:pr-10{padding-right:2.5rem}}</style><style id="dynamicStyles">
-                /* Background Colors */
-                body { background-color: #0a0a0a !important; color: #ffffff !important; }
-                .bg-gray-900 { background-color: #1a1a1a !important; }
-                .bg-gray-800 { background-color: #4d4d4d !important; }
-                .bg-black { background-color: #0a0a0a !important; }
-                
-                /* Accent Colors - All variations */
-                .gold-text { color: #16a34a !important; }
-                .gold-border { border-color: #16a34a !important; }
-                .gold-bg { background-color: #16a34a !important; }
-                
-                /* Text Colors */
-                .text-white { color: #ffffff !important; }
-                .text-yellow-500 { color: #16a34a !important; }
-                
-                /* Border Colors */
-                .border-gray-800 { border-color: #676767 !important; }
-                .border-gray-700 { border-color: #4d4d4d !important; }
-                
-                /* Hover States */
-                .hover\:bg-yellow-600:hover { background-color: #007017 !important; }
-                .hover\:bg-yellow-700:hover { background-color: #007017 !important; }
-                .btn-gold:hover { background-color: #007017 !important; }
-                
-                /* Focus States */
-                .focus\:ring-yellow-500:focus { --tw-ring-color: #16a34a !important; }
-                
-                /* Line Separators - Fix these specifically */
-                .bg-yellow-600 { background-color: #16a34a !important; }
-                
-                /* Star ratings */
-                .fas.fa-star { color: #16a34a !important; }
-                
-                /* Links and highlights */
-                .nav-link:hover { color: #16a34a !important; }
-                
-                /* Mobile floating button */
-                .md\:hidden .gold-bg { background-color: #16a34a !important; }
-                
-                /* All elements with specific gold/yellow classes */
-                [class*="yellow-"], [class*="gold-"] {
-                    --accent-color: #16a34a;
-                }
-                
-                /* Override any remaining yellow/gold colors */
-                *[style*="color: #D4AF37"], *[style*="background-color: #D4AF37"] {
-                    color: #16a34a !important;
-                    background-color: #16a34a !important;
-                }
-            </style></head>
-<body data-customized="true">
+</head>
+<body>
     <!-- Quick Editor -->
     <div id="editForm" style="display: none;">
-        <h3 style="color: #D4AF37; margin: 0 0 12px 0; font-size: 16px;">Quick Edit</h3>
+        <h3 style="color: var(--primary-color); margin: 0 0 12px 0; font-size: 16px;">Quick Edit</h3>
         
         <!-- Company Details -->
         <div style="margin-bottom: 16px;">
-            <h4 style="color: #D4AF37; font-size: 14px; margin: 0 0 8px 0;">Company Details</h4>
+            <h4 style="color: var(--primary-color); font-size: 14px; margin: 0 0 8px 0;">Company Details</h4>
             <label style="color: white; font-size: 12px;">Company Name:</label>
             <input type="text" id="companyName" placeholder="ABC Roofing" value="ABC ROOFS">
             
-            <label style="color: white; font-size: 12px;">Phone:</label>
-            <input type="text" id="phoneNum" placeholder="555-123-4567" value="2099387088">
+            <label style="color: white; font-size: 12px;">Phone (Phoenix):</label>
+            <input type="text" id="phoneNum" placeholder="555-123-4567" value="(623) 555-0123">
+            
+            <label style="color: white; font-size: 12px;">Phone (Secondary):</label>
+            <input type="text" id="phoneNum2" placeholder="555-123-4568" value="(928) 555-0124">
             
             <label style="color: white; font-size: 12px;">Email:</label>
-            <input type="text" id="emailAddr" placeholder="info@company.com" value="ABCROOF@gmail.com">
+            <input type="text" id="emailAddr" placeholder="info@company.com" value="info@abcroofs.com">
             
             <label style="color: white; font-size: 12px;">Location:</label>
             <input type="text" id="locationAddr" placeholder="Phoenix, AZ" value="Surprise, Arizona">
@@ -187,9 +294,9 @@
 
         <!-- Color Customization -->
         <div style="margin-bottom: 16px; border-top: 1px solid #6b7280; padding-top: 12px;">
-            <h4 style="color: #D4AF37; font-size: 14px; margin: 0 0 8px 0;">Colors</h4>
-            <label style="color: white; font-size: 12px;">Accent Color (Gold):</label>
-            <input type="color" id="accentColor" value="#D4AF37" style="width: 100%; height: 30px; border: none; border-radius: 4px; margin: 4px 0 8px 0;">
+            <h4 style="color: var(--primary-color); font-size: 14px; margin: 0 0 8px 0;">Colors</h4>
+            <label style="color: white; font-size: 12px;">Primary Color:</label>
+            <input type="color" id="accentColor" value="#3fc138" style="width: 100%; height: 30px; border: none; border-radius: 4px; margin: 4px 0 8px 0;">
             
             <label style="color: white; font-size: 12px;">Background Color:</label>
             <input type="color" id="bgColor" value="#000000" style="width: 100%; height: 30px; border: none; border-radius: 4px; margin: 4px 0 8px 0;">
@@ -198,17 +305,17 @@
             <input type="color" id="textColor" value="#ffffff" style="width: 100%; height: 30px; border: none; border-radius: 4px; margin: 4px 0 8px 0;">
             
             <label style="color: white; font-size: 12px;">Section Background:</label>
-            <input type="color" id="sectionBgColor" value="#111827" style="width: 100%; height: 30px; border: none; border-radius: 4px; margin: 4px 0 8px 0;">
+            <input type="color" id="sectionBgColor" value="#1a1a1a" style="width: 100%; height: 30px; border: none; border-radius: 4px; margin: 4px 0 8px 0;">
         </div>
 
         <!-- Logo & Images -->
         <div style="margin-bottom: 16px; border-top: 1px solid #6b7280; padding-top: 12px;">
-            <h4 style="color: #D4AF37; font-size: 14px; margin: 0 0 8px 0;">Logo &amp; Images</h4>
+            <h4 style="color: var(--primary-color); font-size: 14px; margin: 0 0 8px 0;">Logo & Images</h4>
             <label style="color: white; font-size: 12px;">Upload Logo:</label>
-            <input type="file" id="logoUpload" accept="image/*" style="width: 100%; padding: 4px; margin: 4px 0 8px 0; background: #374151; border: 1px solid #6b7280; border-radius: 4px; color: white; font-size: 12px;">
+            <input type="file" id="logoUpload" accept="image/*">
             
             <label style="color: white; font-size: 12px;">Logo URL (or paste link):</label>
-            <input type="text" id="logoUrl" placeholder="https://example.com/logo.png" style="width: 100%; padding: 8px; margin: 4px 0 8px 0; background: #374151; border: 1px solid #6b7280; border-radius: 4px; color: white; font-size: 12px;">
+            <input type="text" id="logoUrl" placeholder="https://example.com/logo.png">
             
             <div style="margin-top: 8px;">
                 <input type="checkbox" id="hideLogo" style="margin-right: 6px;">
@@ -216,212 +323,327 @@
             </div>
         </div>
 
+        <!-- Image Management -->
+        <div style="margin-bottom: 16px; border-top: 1px solid #6b7280; padding-top: 12px;">
+            <h4 style="color: var(--primary-color); font-size: 14px; margin: 0 0 8px 0;">Site Images</h4>
+            <div style="font-size: 10px; color: #9ca3af; margin-bottom: 8px;">
+                Upload images or paste URLs from Imgur, ImgBB, or any image host
+            </div>
+            
+            <!-- Hero Background -->
+            <div style="margin-bottom: 12px; padding: 8px; background: #374151; border-radius: 4px;">
+                <label style="color: white; font-size: 12px; font-weight: bold;">Hero Background:</label>
+                <input type="file" id="heroImageUpload" accept="image/*" style="margin-bottom: 4px;">
+                <input type="text" id="heroImageUrl" placeholder="Paste image URL here" style="margin-bottom: 4px;">
+                <button onclick="updateImage('hero')" style="background: #16a34a; color: white; padding: 4px 8px; border: none; border-radius: 4px; font-size: 11px; cursor: pointer; width: 100%;">Update Hero Image</button>
+            </div>
+
+            <!-- About Gallery -->
+            <div style="margin-bottom: 12px; padding: 8px; background: #374151; border-radius: 4px;">
+                <label style="color: white; font-size: 12px; font-weight: bold;">About Gallery (4 images):</label>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-bottom: 4px;">
+                    <input type="text" id="aboutImg1" placeholder="Image 1 URL" style="font-size: 11px;">
+                    <input type="text" id="aboutImg2" placeholder="Image 2 URL" style="font-size: 11px;">
+                    <input type="text" id="aboutImg3" placeholder="Image 3 URL" style="font-size: 11px;">
+                    <input type="text" id="aboutImg4" placeholder="Image 4 URL" style="font-size: 11px;">
+                </div>
+                <button onclick="updateAboutGallery()" style="background: #16a34a; color: white; padding: 4px 8px; border: none; border-radius: 4px; font-size: 11px; cursor: pointer; width: 100%;">Update About Gallery</button>
+            </div>
+
+            <!-- Service Images -->
+            <div style="margin-bottom: 12px; padding: 8px; background: #374151; border-radius: 4px;">
+                <label style="color: white; font-size: 12px; font-weight: bold;">Service Card Images:</label>
+                <select id="serviceSelect" style="width: 100%; margin-bottom: 4px; padding: 4px; background: #1f2937; color: white; border: 1px solid #6b7280; border-radius: 4px; font-size: 11px;">
+                    <option value="">Select a service to update</option>
+                    <option value="service1">Roof Replacement</option>
+                    <option value="service2">Roof Repair</option>
+                    <option value="service3">Roof Maintenance</option>
+                    <option value="service4">Roof Inspections</option>
+                    <option value="service5">Roof Installation</option>
+                    <option value="service6">Solar Lift & Reset</option>
+                    <option value="commercial1">Commercial Inspection</option>
+                    <option value="commercial2">Commercial Replacement</option>
+                    <option value="commercial3">Commercial Repair</option>
+                </select>
+                <input type="file" id="serviceImageUpload" accept="image/*" style="margin-bottom: 4px;">
+                <input type="text" id="serviceImageUrl" placeholder="Or paste image URL" style="margin-bottom: 4px;">
+                <button onclick="updateServiceImage()" style="background: #16a34a; color: white; padding: 4px 8px; border: none; border-radius: 4px; font-size: 11px; cursor: pointer; width: 100%;">Update Service Image</button>
+            </div>
+
+            <!-- Gallery Images -->
+            <div style="margin-bottom: 12px; padding: 8px; background: #374151; border-radius: 4px;">
+                <label style="color: white; font-size: 12px; font-weight: bold;">Project Gallery (5 images):</label>
+                <input type="text" id="gallery1" placeholder="Gallery 1 URL" style="margin-bottom: 2px; font-size: 11px;">
+                <input type="text" id="gallery2" placeholder="Gallery 2 URL" style="margin-bottom: 2px; font-size: 11px;">
+                <input type="text" id="gallery3" placeholder="Gallery 3 URL" style="margin-bottom: 2px; font-size: 11px;">
+                <input type="text" id="gallery4" placeholder="Gallery 4 URL" style="margin-bottom: 2px; font-size: 11px;">
+                <input type="text" id="gallery5" placeholder="Gallery 5 URL" style="margin-bottom: 4px; font-size: 11px;">
+                <button onclick="updateProjectGallery()" style="background: #16a34a; color: white; padding: 4px 8px; border: none; border-radius: 4px; font-size: 11px; cursor: pointer; width: 100%;">Update Project Gallery</button>
+            </div>
+
+            <!-- Other Images -->
+            <div style="padding: 8px; background: #374151; border-radius: 4px;">
+                <label style="color: white; font-size: 12px; font-weight: bold;">Other Images:</label>
+                <div style="margin-bottom: 8px;">
+                    <label style="font-size: 11px; color: #9ca3af;">Process Section:</label>
+                    <input type="text" id="processImage" placeholder="Process image URL" style="margin-bottom: 4px;">
+                </div>
+                <div style="margin-bottom: 8px;">
+                    <label style="font-size: 11px; color: #9ca3af;">Emergency Background:</label>
+                    <input type="text" id="emergencyBg" placeholder="Emergency section background URL" style="margin-bottom: 4px;">
+                </div>
+                <div style="margin-bottom: 8px;">
+                    <label style="font-size: 11px; color: #9ca3af;">Emergency Truck:</label>
+                    <input type="text" id="emergencyTruck" placeholder="Emergency truck image URL" style="margin-bottom: 4px;">
+                </div>
+                <div style="margin-bottom: 8px;">
+                    <label style="font-size: 11px; color: #9ca3af;">Finance Section:</label>
+                    <input type="text" id="financeImage" placeholder="Finance image URL" style="margin-bottom: 4px;">
+                </div>
+                <button onclick="updateOtherImages()" style="background: #16a34a; color: white; padding: 4px 8px; border: none; border-radius: 4px; font-size: 11px; cursor: pointer; width: 100%;">Update Other Images</button>
+            </div>
+        </div>
+
         <!-- GitHub Settings -->
         <div style="margin-bottom: 16px; border-top: 1px solid #6b7280; padding-top: 12px;">
-            <h4 style="color: #D4AF37; font-size: 14px; margin: 0 0 8px 0;">GitHub Settings</h4>
+            <h4 style="color: var(--primary-color); font-size: 14px; margin: 0 0 8px 0;">GitHub Settings</h4>
             <label style="color: white; font-size: 12px;">GitHub Token:</label>
-            <input type="password" id="githubToken" placeholder="ghp_xxxxxxxxxxxx" style="width: 100%; padding: 8px; margin: 4px 0 8px 0; background: #374151; border: 1px solid #6b7280; border-radius: 4px; color: white; font-size: 12px;">
+            <input type="password" id="githubToken" placeholder="ghp_xxxxxxxxxxxx">
             
             <label style="color: white; font-size: 12px;">Repository (username/repo-name):</label>
-            <input type="text" id="githubRepo" value="nexella-ai/contractor-demo" style="width: 100%; padding: 8px; margin: 4px 0 8px 0; background: #374151; border: 1px solid #6b7280; border-radius: 4px; color: white; font-size: 12px;">
+            <input type="text" id="githubRepo" value="nexella-ai/contractor-demo">
             
             <div style="font-size: 10px; color: #9ca3af; margin-top: 4px;">
-                Need a token? Go to GitHub Settings → Developer settings → Personal access tokens → Generate new token (classic) → Check "repo" permissions
+                Need a token? Go to GitHub Settings → Developer settings → Personal access tokens
             </div>
         </div>
 
         <!-- Quick Color Presets -->
         <div style="margin-bottom: 16px;">
-            <h4 style="color: #D4AF37; font-size: 14px; margin: 0 0 8px 0;">Quick Presets</h4>
+            <h4 style="color: var(--primary-color); font-size: 14px; margin: 0 0 8px 0;">Quick Presets</h4>
             <div style="display: flex; gap: 4px; flex-wrap: wrap;">
-                <button onclick="applyColorPreset('gold')" style="background: #D4AF37; color: black; border: none; padding: 4px 8px; border-radius: 4px; font-size: 10px; cursor: pointer;">Gold</button>
+                <button onclick="applyColorPreset('green')" style="background: #3fc138; color: white; border: none; padding: 4px 8px; border-radius: 4px; font-size: 10px; cursor: pointer;">Green</button>
                 <button onclick="applyColorPreset('blue')" style="background: #2563eb; color: white; border: none; padding: 4px 8px; border-radius: 4px; font-size: 10px; cursor: pointer;">Blue</button>
                 <button onclick="applyColorPreset('red')" style="background: #dc2626; color: white; border: none; padding: 4px 8px; border-radius: 4px; font-size: 10px; cursor: pointer;">Red</button>
-                <button onclick="applyColorPreset('green')" style="background: #16a34a; color: white; border: none; padding: 4px 8px; border-radius: 4px; font-size: 10px; cursor: pointer;">Green</button>
+                <button onclick="applyColorPreset('gold')" style="background: #D4AF37; color: black; border: none; padding: 4px 8px; border-radius: 4px; font-size: 10px; cursor: pointer;">Gold</button>
                 <button onclick="applyColorPreset('orange')" style="background: #ea580c; color: white; border: none; padding: 4px 8px; border-radius: 4px; font-size: 10px; cursor: pointer;">Orange</button>
                 <button onclick="applyColorPreset('purple')" style="background: #9333ea; color: white; border: none; padding: 4px 8px; border-radius: 4px; font-size: 10px; cursor: pointer;">Purple</button>
             </div>
         </div>
         
         <button class="update-btn" onclick="updateSite()">Update Site</button>
-        <button class="update-btn" onclick="saveToGitHub()" style="background: #16a34a; margin-left: 4px;" disabled="">Saving...</button>
+        <button class="update-btn" onclick="saveToGitHub()" style="background: #16a34a; margin-left: 4px;">Save to GitHub</button>
         <button class="hide-btn" onclick="hideEditor()">Hide</button>
     </div>
 
-    <button class="show-editor-btn" id="showEditorBtn" onclick="showEditor()" style="display: none;">Show Editor</button>
+    <button class="show-editor-btn" id="showEditorBtn" onclick="showEditor()">Show Editor</button>
 
     <!-- Navigation -->
-    <nav class="bg-black border-b border-gray-800 fixed w-full z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-20 items-center">
-                <!-- Logo -->
-                <div class="flex-shrink-0 flex items-center">
-                    <div class="flex items-center" id="logoContainer">
-                        <i class="fas fa-home text-3xl gold-text mr-2" id="defaultIcon" style="display: block;"></i>
-                        <img id="customLogo" src="" alt="Logo" class="h-10 mr-2" style="display: none;">
-                        <span class="text-xl font-bold text-white">
-                            <span class="gold-text">ABC ROOFS</span>
-                        </span>
+    <nav class="bg-black/90 backdrop-blur-md fixed w-full z-50">
+        <!-- Top Bar -->
+        <div class="bg-surface-container-high text-sm py-2 hidden md:block">
+            <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
+                <div class="flex items-center space-x-4 text-gray-300">
+                    <span class="primary-bg text-black px-3 py-1 rounded-full font-bold">
+                        <i class="fas fa-bolt"></i> Did the recent storm damage your roof? We can help!
+                    </span>
+                    <span>Family Owned and Operated</span>
+                    <span>Five-Star Experience</span>
+                    <span>Lifetime Warranty</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="#" class="text-gray-300 hover:text-white">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                    <div class="flex items-center space-x-3">
+                        <div>
+                            <div class="text-xs">Phoenix, AZ</div>
+                            <a href="tel:(623) 555-0123" class="primary-text font-bold">(623) 555-0123</a>
+                        </div>
+                        <div>
+                            <div class="text-xs">Prescott, AZ</div>
+                            <a href="tel:(928) 555-0124" class="primary-text font-bold">(928) 555-0124</a>
+                        </div>
                     </div>
                 </div>
-                
-                <!-- Mobile menu button -->
-                <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-button" class="text-gray-300 hover:text-white focus:outline-none">
-                        <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
-                    </button>
-                </div>
-                
-                <!-- Desktop Menu -->
-                <div class="hidden md:flex md:items-center md:space-x-8">
-                    <a href="#home" class="nav-link text-white hover:text-gray-300 px-3 py-2 text-sm font-medium">Home</a>
-                    <a href="#services" class="nav-link text-white hover:text-gray-300 px-3 py-2 text-sm font-medium">Services</a>
-                    <a href="#about" class="nav-link text-white hover:text-gray-300 px-3 py-2 text-sm font-medium">About</a>
-                    <a href="#testimonials" class="nav-link text-white hover:text-gray-300 px-3 py-2 text-sm font-medium">Testimonials</a>
-                    <a href="#contact" class="nav-link text-white hover:text-gray-300 px-3 py-2 text-sm font-medium">Contact</a>
-                    <a href="tel:2099387088" class="bg-transparent border gold-border text-white px-4 py-2 rounded-md hover:bg-yellow-700 transition duration-300">
-                        <i class="fas fa-phone-alt mr-2"></i> 2099387088
-                    </a>
+            </div>
+        </div>
+        
+        <!-- Main Navigation -->
+        <div class="border-b border-gray-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between h-20 items-center">
+                    <!-- Logo -->
+                    <div class="flex items-center">
+                        <div class="flex items-center" id="logoContainer">
+                            <i class="fas fa-home text-3xl primary-text mr-3" id="defaultIcon"></i>
+                            <img id="customLogo" src="" alt="Logo" class="h-14 mr-3" style="display: none;">
+                            <span class="text-2xl font-bold">
+                                <span class="primary-text">ABC</span> ROOFS
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <!-- Desktop Menu -->
+                    <div class="hidden lg:flex items-center space-x-6">
+                        <a href="#home" class="nav-link hover:text-green-400 transition">Home</a>
+                        <div class="relative group">
+                            <a href="#services" class="nav-link hover:text-green-400 transition flex items-center">
+                                Residential <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                            </a>
+                        </div>
+                        <div class="relative group">
+                            <a href="#services" class="nav-link hover:text-green-400 transition flex items-center">
+                                Commercial <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                            </a>
+                        </div>
+                        <a href="#service-areas" class="nav-link hover:text-green-400 transition">Service Areas</a>
+                        <a href="#emergency" class="nav-link hover:text-green-400 transition">Emergency</a>
+                        <a href="#about" class="nav-link hover:text-green-400 transition">About</a>
+                        <a href="#contact" class="nav-link hover:text-green-400 transition">Contact</a>
+                        <a href="tel:(623) 555-0123" class="btn-primary px-6 py-2 rounded-full flex items-center">
+                            <i class="fas fa-phone mr-2"></i> (623) 555-0123
+                        </a>
+                    </div>
+                    
+                    <!-- Mobile menu button -->
+                    <div class="lg:hidden">
+                        <button id="mobile-menu-button" class="text-gray-300 hover:text-white">
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                            </svg>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
         
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="md:hidden hidden bg-black border-t border-gray-800">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="#home" class="nav-link block px-3 py-2 text-base font-medium text-white hover:bg-gray-900 rounded-md">Home</a>
-                <a href="#services" class="nav-link block px-3 py-2 text-base font-medium text-white hover:bg-gray-900 rounded-md">Services</a>
-                <a href="#about" class="nav-link block px-3 py-2 text-base font-medium text-white hover:bg-gray-900 rounded-md">About</a>
-                <a href="#testimonials" class="nav-link block px-3 py-2 text-base font-medium text-white hover:bg-gray-900 rounded-md">Testimonials</a>
-                <a href="#contact" class="nav-link block px-3 py-2 text-base font-medium text-white hover:bg-gray-900 rounded-md">Contact</a>
-                <a href="tel:2099387088" class="block px-3 py-2 text-base font-medium text-white bg-yellow-700 rounded-md text-center">
-                    <i class="fas fa-phone-alt mr-2"></i> 2099387088
+        <div id="mobile-menu" class="lg:hidden hidden bg-black/95 backdrop-blur-md">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#home" class="block px-3 py-2 text-base font-medium hover:bg-gray-900 rounded">Home</a>
+                <a href="#services" class="block px-3 py-2 text-base font-medium hover:bg-gray-900 rounded">Residential</a>
+                <a href="#services" class="block px-3 py-2 text-base font-medium hover:bg-gray-900 rounded">Commercial</a>
+                <a href="#service-areas" class="block px-3 py-2 text-base font-medium hover:bg-gray-900 rounded">Service Areas</a>
+                <a href="#emergency" class="block px-3 py-2 text-base font-medium hover:bg-gray-900 rounded">Emergency</a>
+                <a href="#about" class="block px-3 py-2 text-base font-medium hover:bg-gray-900 rounded">About</a>
+                <a href="#contact" class="block px-3 py-2 text-base font-medium hover:bg-gray-900 rounded">Contact</a>
+                <a href="tel:(623) 555-0123" class="block px-3 py-2 text-base font-medium primary-bg text-black rounded text-center mt-3">
+                    <i class="fas fa-phone mr-2"></i> Call Now
                 </a>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="hero flex items-center justify-center pt-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
-            <h1 class="text-4xl md:text-6xl font-bold mb-6">
-                <span class="gold-text">QUALITY</span> CONSTRUCTION SERVICES IN <span class="gold-text">Surprise, Arizona</span>
-            </h1>
-            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
-                Residential &amp; Commercial Roofing, Concrete, Stucco, Framing, and Interior Remodeling
-            </p>
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="#contact" class="gold-bg text-black font-bold py-3 px-8 rounded-md hover:bg-yellow-600 transition duration-300 text-lg">
-                    FREE ESTIMATE
-                </a>
-                <a href="tel:2099387088" class="bg-transparent border-2 border-white text-white font-bold py-3 px-8 rounded-md hover:bg-gray-800 transition duration-300 text-lg">
-                    CALL NOW
-                </a>
+    <section id="home" class="hero flex items-center justify-center pt-32">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="animate-fadeInUp">
+                    <h1 class="text-5xl md:text-7xl font-black mb-6">
+                        #1 Trusted <br>
+                        <span class="primary-bg text-black px-8 py-3 inline-block slanted-rectangle">
+                            Roofing Contractor
+                        </span><br>
+                        across Arizona
+                    </h1>
+                    <p class="text-xl mb-8 text-gray-300">
+                        Quality Protection for Your Arizona Property
+                    </p>
+                    
+                    <!-- Trust badges -->
+                    <div class="space-y-3 mb-8">
+                        <div class="flex items-center gap-3">
+                            <div class="primary-bg p-2 rounded">
+                                <i class="fas fa-check text-black"></i>
+                            </div>
+                            <span>Certified Arizona Roofing Experts</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="primary-bg p-2 rounded">
+                                <i class="fas fa-check text-black"></i>
+                            </div>
+                            <span>Lifetime Warranty Available</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="primary-bg p-2 rounded">
+                                <i class="fas fa-check text-black"></i>
+                            </div>
+                            <span>Same-Day Emergency Service</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Contact Form Card -->
+                <div class="bg-surface-container/90 backdrop-blur-md p-8 rounded-xl">
+                    <h2 class="text-2xl font-bold primary-text mb-2">Book a Free Consultation</h2>
+                    <p class="text-gray-300 mb-6">Let us know how we can help on your next project!</p>
+                    
+                    <form class="space-y-4">
+                        <div class="grid grid-cols-2 gap-4">
+                            <input type="text" placeholder="First Name" class="bg-white/10 border border-gray-600 px-4 py-3 rounded-lg">
+                            <input type="text" placeholder="Last Name" class="bg-white/10 border border-gray-600 px-4 py-3 rounded-lg">
+                        </div>
+                        <input type="email" placeholder="Email" class="w-full bg-white/10 border border-gray-600 px-4 py-3 rounded-lg">
+                        <input type="tel" placeholder="Phone" class="w-full bg-white/10 border border-gray-600 px-4 py-3 rounded-lg">
+                        <textarea placeholder="Message" rows="3" class="w-full bg-white/10 border border-gray-600 px-4 py-3 rounded-lg"></textarea>
+                        <button type="submit" class="btn-primary w-full py-3 rounded-lg font-bold">
+                            Submit
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section id="services" class="py-20 bg-gray-900">
+    <!-- Testimonials Section -->
+    <section class="py-20 bg-gradient-to-r from-gray-50 to-white relative overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4 gold-text">OUR SERVICES</h2>
-                <div class="w-20 h-1 gold-bg mx-auto mb-6"></div>
-                <p class="text-xl max-w-3xl mx-auto">
-                    Comprehensive construction solutions tailored to your needs in Surprise, Arizona and surrounding areas
-                </p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Service 1 -->
-                <div class="service-card bg-gray-800 rounded-lg overflow-hidden shadow-lg transition duration-300">
-                    <img src="https://cdn-gjmpl.nitrocdn.com/pMdDhtQPIxfNUycwsHPVBkRhGiHFjwqL/assets/images/optimized/rev-d099ed6/interstateroof.com/wp-content/uploads/2025/01/Alb_Tiling-scaled.webp" alt="Roofing" class="w-full h-64 object-cover">
-                    <div class="p-6">
-                        <div class="flex items-center mb-4">
-                            <i class="fas fa-home text-2xl gold-text mr-3"></i>
-                            <h3 class="text-xl font-bold">ROOFING</h3>
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h3 class="primary-text text-xl font-bold mb-2">Testimonials</h3>
+                    <h2 class="text-4xl font-black text-gray-900 mb-4">What Our Clients Are Saying</h2>
+                    <p class="text-gray-700 text-lg mb-8">
+                        Hear what our happy clients have to say about their experience with our roofing services — from expert craftsmanship to professional service.
+                    </p>
+                    
+                    <!-- Review summary -->
+                    <div class="bg-white p-6 rounded-xl shadow-lg inline-block">
+                        <div class="flex items-center gap-4">
+                            <div>
+                                <div class="flex mb-2">
+                                    <i class="fas fa-star primary-text"></i>
+                                    <i class="fas fa-star primary-text"></i>
+                                    <i class="fas fa-star primary-text"></i>
+                                    <i class="fas fa-star primary-text"></i>
+                                    <i class="fas fa-star primary-text"></i>
+                                </div>
+                                <div class="text-gray-700">
+                                    <span class="primary-text font-bold text-xl">4.9</span> Stars - Based on <span class="font-bold">488</span> Reviews
+                                </div>
+                            </div>
                         </div>
-                        <p class="text-gray-300 mb-4">
-                            Expert residential and commercial roofing services including installation, repair, and maintenance using premium materials.
-                        </p>
-                        <a href="#contact" class="gold-text font-medium hover:underline">Get a Free Estimate →</a>
                     </div>
                 </div>
                 
-                <!-- Service 2 -->
-                <div class="service-card bg-gray-800 rounded-lg overflow-hidden shadow-lg transition duration-300">
-                    <img src="https://www.qualityconcretenm.com/wp-content/smush-webp/2024/10/Quality-Concrete-NM-driveways1.jpeg.webp" alt="Concrete" class="w-full h-64 object-cover">
-                    <div class="p-6">
-                        <div class="flex items-center mb-4">
-                            <i class="fas fa-building text-2xl gold-text mr-3"></i>
-                            <h3 class="text-xl font-bold">CONCRETE</h3>
-                        </div>
-                        <p class="text-gray-300 mb-4">
-                            Professional concrete work including driveways, patios, foundations, and decorative concrete solutions for any project.
-                        </p>
-                        <a href="#contact" class="gold-text font-medium hover:underline">Get a Free Estimate →</a>
+                <!-- Testimonial Card -->
+                <div class="bg-white p-8 rounded-xl shadow-xl">
+                    <div class="mb-6">
+                        <i class="fas fa-star primary-text"></i>
+                        <i class="fas fa-star primary-text"></i>
+                        <i class="fas fa-star primary-text"></i>
+                        <i class="fas fa-star primary-text"></i>
+                        <i class="fas fa-star primary-text"></i>
                     </div>
-                </div>
-                
-                <!-- Service 3 -->
-                <div class="service-card bg-gray-800 rounded-lg overflow-hidden shadow-lg transition duration-300">
-                    <img src="https://www.stuccocontractorsantafe.com/wp-content/uploads/2023/03/Residential-Strucco-Stucco-Contractors-Santa-Fe-NM.jpg.webp" alt="Stucco" class="w-full h-64 object-cover">
-                    <div class="p-6">
-                        <div class="flex items-center mb-4">
-                            <i class="fas fa-paint-roller text-2xl gold-text mr-3"></i>
-                            <h3 class="text-xl font-bold">STUCCO</h3>
+                    <p class="text-gray-700 mb-6 italic">
+                        "ABC ROOFS completely replaced our roof after storm damage. They were professional, efficient, and cleaned up perfectly. The roof looks amazing and we've had no issues since installation."
+                    </p>
+                    <div class="flex items-center">
+                        <img src="https://ui-avatars.com/api/?name=Gary+D&background=3fc138&color=fff" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold text-gray-900">Gary D.</h4>
+                            <p class="text-sm text-gray-600">Surprise, Arizona</p>
                         </div>
-                        <p class="text-gray-300 mb-4">
-                            High-quality stucco application and repair services to protect and beautify your home or commercial property.
-                        </p>
-                        <a href="#contact" class="gold-text font-medium hover:underline">Get a Free Estimate →</a>
-                    </div>
-                </div>
-                
-                <!-- Service 4 -->
-                <div class="service-card bg-gray-800 rounded-lg overflow-hidden shadow-lg transition duration-300">
-                    <img src="https://lirp.cdn-website.com/54368a2f/dms3rep/multi/opt/framing-640w.jpg" alt="Framing" class="w-full h-64 object-cover">
-                    <div class="p-6">
-                        <div class="flex items-center mb-4">
-                            <i class="fas fa-hammer text-2xl gold-text mr-3"></i>
-                            <h3 class="text-xl font-bold">FRAMING</h3>
-                        </div>
-                        <p class="text-gray-300 mb-4">
-                            Precision framing services for new construction, additions, and renovations with attention to structural integrity.
-                        </p>
-                        <a href="#contact" class="gold-text font-medium hover:underline">Get a Free Estimate →</a>
-                    </div>
-                </div>
-                
-                <!-- Service 5 -->
-                <div class="service-card bg-gray-800 rounded-lg overflow-hidden shadow-lg transition duration-300">
-                    <img src="https://abqhomeshows.com/wp-content/uploads/2019/11/ABQHomeShow_Contact_Hero-min.jpg" alt="Interior Remodeling" class="w-full h-64 object-cover">
-                    <div class="p-6">
-                        <div class="flex items-center mb-4">
-                            <i class="fas fa-couch text-2xl gold-text mr-3"></i>
-                            <h3 class="text-xl font-bold">INTERIOR REMODELING</h3>
-                        </div>
-                        <p class="text-gray-300 mb-4">
-                            Complete interior remodeling services including kitchens, bathrooms, basements, and whole-home transformations.
-                        </p>
-                        <a href="#contact" class="gold-text font-medium hover:underline">Get a Free Estimate →</a>
-                    </div>
-                </div>
-                
-                <!-- Service 6 -->
-                <div class="service-card bg-gray-800 rounded-lg overflow-hidden shadow-lg transition duration-300">
-                    <img src="https://www.goblusky.com/media/commercial-roofing-image-1.jpg" alt="Commercial Services" class="w-full h-64 object-cover">
-                    <div class="p-6">
-                        <div class="flex items-center mb-4">
-                            <i class="fas fa-store text-2xl gold-text mr-3"></i>
-                            <h3 class="text-xl font-bold">COMMERCIAL SERVICES</h3>
-                        </div>
-                        <p class="text-gray-300 mb-4">
-                            Comprehensive commercial construction services including roofing, concrete, and building maintenance for businesses.
-                        </p>
-                        <a href="#contact" class="gold-text font-medium hover:underline">Get a Free Estimate →</a>
                     </div>
                 </div>
             </div>
@@ -429,37 +651,292 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-20 bg-black">
+    <section id="about" class="py-20 bg-gradient-to-br from-surface-container-high to-surface-container-lowest">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col lg:flex-row items-center">
-                <div class="lg:w-1/2 mb-10 lg:mb-0 lg:pr-10">
-                    <img src="https://images.unsplash.com/photo-1600585152220-90363fe7e115?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=1470&amp;q=80" alt="About ABC ROOFS" class="rounded-lg shadow-xl w-full">
+            <div class="text-center mb-12">
+                <svg class="w-20 h-6 mx-auto mb-6 primary-text" viewBox="0 0 13.26 4.28">
+                    <polygon fill="currentColor" points="13.26 4.28 10.72 2.64 10.72 .04 9.26 .04 9.26 1.7 6.63 0 0 4.28 6.63 .71 9.55 2.28 9.55 .32 10.44 .32 10.44 2.76 13.26 4.28"/>
+                </svg>
+                <h2 class="text-4xl font-black mb-4">
+                    Quality <span class="primary-text">Roofing</span> and <span class="primary-text">Exterior Services</span> — Built on Trust
+                </h2>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Gallery Grid -->
+                <div class="grid grid-cols-2 gap-4">
+                    <img src="https://picsum.photos/400/300?random=1" alt="Roofing work" class="rounded-lg shadow-xl animate-float">
+                    <img src="https://picsum.photos/400/300?random=2" alt="Roofing team" class="rounded-lg shadow-xl mt-8">
+                    <img src="https://picsum.photos/400/300?random=3" alt="Quality roofing" class="rounded-lg shadow-xl -mt-8">
+                    <img src="https://picsum.photos/400/300?random=4" alt="Professional service" class="rounded-lg shadow-xl animate-float">
                 </div>
-                <div class="lg:w-1/2">
-                    <h2 class="text-3xl md:text-4xl font-bold mb-6 gold-text">ABOUT ABC ROOFS</h2>
-                    <div class="w-20 h-1 gold-bg mb-6"></div>
-                    <p class="text-lg mb-6">
-                        ABC ROOFS is a premier construction company serving Surprise, Arizona and surrounding areas with over 15 years of experience in the industry. We take pride in delivering exceptional craftsmanship and unparalleled customer service.
-                    </p>
-                    <p class="text-lg mb-6">
-                        Our team of licensed and insured professionals is dedicated to quality workmanship, using only the finest materials and proven techniques to ensure your project exceeds expectations.
-                    </p>
-                    <div class="space-y-4">
-                        <div class="flex items-start">
-                            <i class="fas fa-check-circle text-xl gold-text mt-1 mr-3"></i>
-                            <p class="text-lg">Fully licensed and insured</p>
+                
+                <!-- Content -->
+                <div>
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="primary-bg w-1 h-8"></div>
+                        <h3 class="text-2xl font-bold">Who We Are: Arizona's Trusted Roofing Partner</h3>
+                    </div>
+                    
+                    <div class="space-y-4 text-gray-300 mb-8">
+                        <p>
+                            Since 2016, ABC ROOFS has protected homes and businesses across Phoenix, Prescott, and throughout Maricopa and Yavapai counties with exceptional roofing services. Our team specializes in complete roofing solutions for both residential and commercial properties.
+                        </p>
+                        <p>
+                            What sets ABC ROOFS apart is our deep understanding of Arizona's climate. Our local expertise ensures your roof can withstand scorching Phoenix summers and Prescott's sudden storms. We pride ourselves on quality craftsmanship, using only premium materials.
+                        </p>
+                        <p>
+                            When you choose ABC ROOFS, you're selecting a team that prioritizes honest communication, transparent pricing, and customer satisfaction above all else.
+                        </p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="flex gap-4">
+                            <div class="primary-bg rounded-full p-3 h-fit">
+                                <i class="fas fa-hammer text-black"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg mb-1">Quality Craftsmanship</h4>
+                                <p class="text-gray-300 text-sm">Excellence in every project with top-grade materials</p>
+                            </div>
                         </div>
-                        <div class="flex items-start">
-                            <i class="fas fa-check-circle text-xl gold-text mt-1 mr-3"></i>
-                            <p class="text-lg">Residential and commercial services</p>
+                        <div class="flex gap-4">
+                            <div class="primary-bg rounded-full p-3 h-fit">
+                                <i class="fas fa-user-check text-black"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg mb-1">Customer-First Approach</h4>
+                                <p class="text-gray-300 text-sm">Your satisfaction drives everything we do</p>
+                            </div>
                         </div>
-                        <div class="flex items-start">
-                            <i class="fas fa-check-circle text-xl gold-text mt-1 mr-3"></i>
-                            <p class="text-lg">Free estimates and consultations</p>
+                        <div class="flex gap-4">
+                            <div class="primary-bg rounded-full p-3 h-fit">
+                                <i class="fas fa-map-marker-alt text-black"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg mb-1">Local Expertise</h4>
+                                <p class="text-gray-300 text-sm">Solutions designed for Arizona's unique climate</p>
+                            </div>
                         </div>
-                        <div class="flex items-start">
-                            <i class="fas fa-check-circle text-xl gold-text mt-1 mr-3"></i>
-                            <p class="text-lg">Competitive pricing with no hidden fees</p>
+                        <div class="flex gap-4">
+                            <div class="primary-bg rounded-full p-3 h-fit">
+                                <i class="fas fa-handshake text-black"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg mb-1">Honest and Transparent</h4>
+                                <p class="text-gray-300 text-sm">Straightforward pricing with no hidden costs</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Owner Card -->
+            <div class="mt-16 bg-gradient-to-t from-white/5 to-transparent rounded-2xl p-8 text-center max-w-2xl mx-auto">
+                <img src="https://ui-avatars.com/api/?name=John+Smith&background=3fc138&color=fff&size=150" class="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-white/20">
+                <h3 class="text-3xl font-black primary-text mb-2">John Smith</h3>
+                <p class="text-gray-300">
+                    Hi, I'm John Smith, owner of ABC ROOFS. ABC was founded in 2016 with a simple goal: to provide homeowners with top-quality roofing services rooted in integrity, professionalism, and personal care.
+                </p>
+                <div class="mt-8 space-y-4">
+                    <a href="#contact" class="btn-primary px-8 py-3 rounded-full inline-block">
+                        <i class="fas fa-calendar mr-2"></i> Schedule a Consultation
+                    </a>
+                    <div>
+                        <a href="tel:(623) 555-0123" class="text-gray-300 hover:text-white">
+                            <i class="fas fa-phone mr-2"></i> Or Give Us a Call
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brands/Certifications Section -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-8">
+                <h2 class="text-2xl font-bold text-gray-900 mb-2">TRUSTED EXPERTISE FOR EVERY ROOFING PROJECT</h2>
+                <p class="text-gray-600 max-w-3xl mx-auto">
+                    At ABC ROOFS, we bring recognized industry excellence to every roof we work on. Our team has earned prestigious designations through rigorous training and demonstrated expertise.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 items-center">
+                <img src="https://via.placeholder.com/150x80/ffffff/cccccc?text=GAF" alt="GAF Certified" class="h-16 object-contain mx-auto filter grayscale hover:grayscale-0 transition">
+                <img src="https://via.placeholder.com/150x80/ffffff/cccccc?text=Owens+Corning" alt="Owens Corning" class="h-16 object-contain mx-auto filter grayscale hover:grayscale-0 transition">
+                <img src="https://via.placeholder.com/150x80/ffffff/cccccc?text=CertainTeed" alt="CertainTeed" class="h-16 object-contain mx-auto filter grayscale hover:grayscale-0 transition">
+                <img src="https://via.placeholder.com/150x80/ffffff/cccccc?text=BBB+A%2B" alt="BBB A+" class="h-16 object-contain mx-auto filter grayscale hover:grayscale-0 transition">
+                <img src="https://via.placeholder.com/150x80/ffffff/cccccc?text=5+Stars" alt="5 Star Reviews" class="h-16 object-contain mx-auto filter grayscale hover:grayscale-0 transition">
+                <img src="https://via.placeholder.com/150x80/ffffff/cccccc?text=Licensed" alt="Licensed & Insured" class="h-16 object-contain mx-auto filter grayscale hover:grayscale-0 transition">
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <svg class="w-20 h-6 mx-auto mb-6 primary-text" viewBox="0 0 13.26 4.28">
+                    <polygon fill="currentColor" points="13.26 4.28 10.72 2.64 10.72 .04 9.26 .04 9.26 1.7 6.63 0 0 4.28 6.63 .71 9.55 2.28 9.55 .32 10.44 .32 10.44 2.76 13.26 4.28"/>
+                </svg>
+                <h2 class="text-4xl md:text-5xl font-black mb-4 text-gray-900">
+                    Services We Provide, <span class="primary-text">Done Right</span>
+                </h2>
+                <p class="text-xl max-w-3xl mx-auto text-gray-700">
+                    Looking for top-quality roofing services in Phoenix, Prescott, or throughout Maricopa and Yavapai counties? ABC ROOFS delivers excellence in residential and commercial roofing.
+                </p>
+            </div>
+            
+            <!-- Residential Services -->
+            <div class="mb-16">
+                <h3 class="text-3xl font-black text-gray-900 mb-8">Residential</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Service Card 1 -->
+                    <div class="service-card bg-white rounded-xl overflow-hidden shadow-lg">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://picsum.photos/600/400?random=5" alt="Roof Replacement" class="service-card-img w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h4 class="text-xl font-bold text-gray-900 mb-2">Residential Roof Replacement</h4>
+                            <div class="service-description">
+                                <p class="text-gray-600 mb-4">
+                                    Expert roof replacement services for Phoenix and Prescott homes. Get a durable, quality new roof that protects your family.
+                                </p>
+                                <a href="#contact" class="primary-text font-semibold">Learn More →</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Service Card 2 -->
+                    <div class="service-card bg-white rounded-xl overflow-hidden shadow-lg">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://picsum.photos/600/400?random=6" alt="Roof Repair" class="service-card-img w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h4 class="text-xl font-bold text-gray-900 mb-2">Residential Roof Repair</h4>
+                            <div class="service-description">
+                                <p class="text-gray-600 mb-4">
+                                    Expert roof repair services for your home. We fix leaks, damage, and worn areas to protect your property.
+                                </p>
+                                <a href="#contact" class="primary-text font-semibold">Learn More →</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Service Card 3 -->
+                    <div class="service-card bg-white rounded-xl overflow-hidden shadow-lg">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://picsum.photos/600/400?random=7" alt="Roof Maintenance" class="service-card-img w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h4 class="text-xl font-bold text-gray-900 mb-2">Residential Roof Maintenance</h4>
+                            <div class="service-description">
+                                <p class="text-gray-600 mb-4">
+                                    Enroll in our comprehensive roof maintenance program to protect your home with regular inspections and preventive care.
+                                </p>
+                                <a href="#contact" class="primary-text font-semibold">Learn More →</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Service Card 4 -->
+                    <div class="service-card bg-white rounded-xl overflow-hidden shadow-lg">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://picsum.photos/600/400?random=8" alt="Roof Inspection" class="service-card-img w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h4 class="text-xl font-bold text-gray-900 mb-2">Roof Inspections</h4>
+                            <div class="service-description">
+                                <p class="text-gray-600 mb-4">
+                                    Expert roof inspections for homeowners. We thoroughly check your roof's condition to prevent damage.
+                                </p>
+                                <a href="#contact" class="primary-text font-semibold">Learn More →</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Service Card 5 -->
+                    <div class="service-card bg-white rounded-xl overflow-hidden shadow-lg">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://picsum.photos/600/400?random=9" alt="Roof Installation" class="service-card-img w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h4 class="text-xl font-bold text-gray-900 mb-2">Roof Installation</h4>
+                            <div class="service-description">
+                                <p class="text-gray-600 mb-4">
+                                    Expert residential roof installation services. We install asphalt shingles, tile, and flat roofs for lasting protection.
+                                </p>
+                                <a href="#contact" class="primary-text font-semibold">Learn More →</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Service Card 6 -->
+                    <div class="service-card bg-white rounded-xl overflow-hidden shadow-lg">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://picsum.photos/600/400?random=10" alt="Solar Panel Services" class="service-card-img w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h4 class="text-xl font-bold text-gray-900 mb-2">Solar Lift & Reset</h4>
+                            <div class="service-description">
+                                <p class="text-gray-600 mb-4">
+                                    Expert solar panel detachment and reset services, safely removing and reinstalling your panels when roof work is needed.
+                                </p>
+                                <a href="#contact" class="primary-text font-semibold">Learn More →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Commercial Services -->
+            <div>
+                <h3 class="text-3xl font-black text-gray-900 mb-8">Commercial</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Commercial Service Cards -->
+                    <div class="service-card bg-white rounded-xl overflow-hidden shadow-lg">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://picsum.photos/600/400?random=11" alt="Commercial Roofing" class="service-card-img w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h4 class="text-xl font-bold text-gray-900 mb-2">Commercial Roof Inspection</h4>
+                            <div class="service-description">
+                                <p class="text-gray-600 mb-4">
+                                    Comprehensive commercial roof inspections. We identify issues early to prevent major damage.
+                                </p>
+                                <a href="#contact" class="primary-text font-semibold">Learn More →</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="service-card bg-white rounded-xl overflow-hidden shadow-lg">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://picsum.photos/600/400?random=12" alt="Commercial Replacement" class="service-card-img w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h4 class="text-xl font-bold text-gray-900 mb-2">Commercial Roof Replacement</h4>
+                            <div class="service-description">
+                                <p class="text-gray-600 mb-4">
+                                    Expert commercial roof replacement. Quality materials, professional installation, and long-lasting protection.
+                                </p>
+                                <a href="#contact" class="primary-text font-semibold">Learn More →</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="service-card bg-white rounded-xl overflow-hidden shadow-lg">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://picsum.photos/600/400?random=13" alt="Commercial Repair" class="service-card-img w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h4 class="text-xl font-bold text-gray-900 mb-2">Commercial Roof Repair</h4>
+                            <div class="service-description">
+                                <p class="text-gray-600 mb-4">
+                                    Expert commercial roof repair services. We fix leaks, damage, and wear on flat roofs and more.
+                                </p>
+                                <a href="#contact" class="primary-text font-semibold">Learn More →</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -467,90 +944,283 @@
         </div>
     </section>
 
-    <!-- Testimonials Section -->
-    <section id="testimonials" class="py-20 bg-gray-900">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4 gold-text">CLIENT TESTIMONIALS</h2>
-                <div class="w-20 h-1 gold-bg mx-auto mb-6"></div>
-                <p class="text-xl max-w-3xl mx-auto">
-                    Hear what our satisfied customers have to say about our work
-                </p>
+    <!-- Our Process Section -->
+    <section class="py-20 bg-gradient-to-br from-surface-container-high to-surface-container-lowest">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="mb-12">
+                <h2 class="text-4xl font-black mb-4">Our Process</h2>
+                <h3 class="text-2xl primary-text">What you can expect</h3>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Testimonial 1 -->
-                <div class="testimonial-card p-8 rounded-lg">
-                    <div class="flex items-center mb-4">
-                        <div class="text-yellow-500 text-2xl mr-2">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
+            <div class="grid lg:grid-cols-2 gap-12">
+                <div class="space-y-6">
+                    <!-- Process Step 1 -->
+                    <div class="process-card p-6 rounded-lg flex gap-4 cursor-pointer">
+                        <div class="primary-bg text-black font-bold text-2xl w-14 h-14 rounded-lg flex items-center justify-center flex-shrink-0">
+                            1
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-bold mb-2">Consultation</h4>
+                            <p class="text-gray-300">
+                                We start with a detailed, no-obligation consultation to understand your roofing needs. Our experts will assess your property and discuss options.
+                            </p>
                         </div>
                     </div>
-                    <p class="text-gray-300 mb-6 italic">
-                        "ABC ROOFS completely replaced our roof after storm damage. They were professional, efficient, and cleaned up perfectly. The roof looks amazing and we've had no issues since installation."
-                    </p>
-                    <div class="flex items-center">
-                        <div class="bg-gray-700 rounded-full w-12 h-12 flex items-center justify-center">
-                            <i class="fas fa-user text-xl"></i>
+                    
+                    <!-- Process Step 2 -->
+                    <div class="process-card p-6 rounded-lg flex gap-4 cursor-pointer">
+                        <div class="primary-bg text-black font-bold text-2xl w-14 h-14 rounded-lg flex items-center justify-center flex-shrink-0">
+                            2
                         </div>
-                        <div class="ml-4">
-                            <h4 class="font-bold">Michael R.</h4>
-                            <p class="text-sm text-gray-400">Surprise, Arizona</p>
+                        <div>
+                            <h4 class="text-xl font-bold mb-2">Inspection</h4>
+                            <p class="text-gray-300">
+                                Our certified specialists perform a thorough roof inspection, identifying existing or potential issues. We document everything with photos.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Process Step 3 -->
+                    <div class="process-card p-6 rounded-lg flex gap-4 cursor-pointer">
+                        <div class="primary-bg text-black font-bold text-2xl w-14 h-14 rounded-lg flex items-center justify-center flex-shrink-0">
+                            3
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-bold mb-2">Installation</h4>
+                            <p class="text-gray-300">
+                                Our skilled technicians execute your project with precision using quality materials built for Arizona's climate.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Process Step 4 -->
+                    <div class="process-card p-6 rounded-lg flex gap-4 cursor-pointer">
+                        <div class="primary-bg text-black font-bold text-2xl w-14 h-14 rounded-lg flex items-center justify-center flex-shrink-0">
+                            4
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-bold mb-2">Walkthrough</h4>
+                            <p class="text-gray-300">
+                                After a final quality inspection, we walk you through the completed work, answer questions, and provide maintenance tips.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Process Step 5 -->
+                    <div class="process-card p-6 rounded-lg flex gap-4 cursor-pointer">
+                        <div class="primary-bg text-black font-bold text-2xl w-14 h-14 rounded-lg flex items-center justify-center flex-shrink-0">
+                            5
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-bold mb-2">Warranty</h4>
+                            <p class="text-gray-300">
+                                Every project comes with extensive workmanship warranties and our ironclad ABC Guarantee!
+                            </p>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Testimonial 2 -->
-                <div class="testimonial-card p-8 rounded-lg">
-                    <div class="flex items-center mb-4">
-                        <div class="text-yellow-500 text-2xl mr-2">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
+                <!-- Process Image -->
+                <div class="relative">
+                    <img src="https://picsum.photos/800/600?random=14" alt="Our Process" class="rounded-xl shadow-2xl">
+                    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 bg-primary-dark text-white px-8 py-3 rounded-full font-bold">
+                        <span class="text-2xl mr-2">5</span> Warranty
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="py-20 bg-gray-100">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid lg:grid-cols-2 gap-12 items-center mb-12">
+                <div>
+                    <svg class="w-20 h-6 mb-6 primary-text" viewBox="0 0 13.26 4.28">
+                        <polygon fill="currentColor" points="13.26 4.28 10.72 2.64 10.72 .04 9.26 .04 9.26 1.7 6.63 0 0 4.28 6.63 .71 9.55 2.28 9.55 .32 10.44 .32 10.44 2.76 13.26 4.28"/>
+                    </svg>
+                    <h2 class="text-4xl font-black text-gray-900 mb-4">Our Roofing Projects</h2>
+                    <p class="text-gray-700 text-lg mb-8">
+                        Take a look at our portfolio showcasing ABC ROOFS' quality craftsmanship across Phoenix, Prescott, and surrounding areas.
+                    </p>
+                    <div class="animate-bounce">
+                        <i class="fas fa-arrow-right text-3xl primary-text"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Gallery Grid -->
+            <div class="scroll-container pb-4">
+                <div class="flex gap-6" style="width: max-content;">
+                    <div class="relative">
+                        <img src="https://picsum.photos/400/400?random=15" alt="Phoenix Project" class="rounded-lg shadow-lg">
+                        <div class="absolute bottom-4 right-0 bg-white/90 px-6 py-2 font-bold text-gray-900">
+                            Phoenix, AZ
                         </div>
                     </div>
-                    <p class="text-gray-300 mb-6 italic">
-                        "We hired ABC ROOFS for a complete kitchen remodel and couldn't be happier. They listened to our needs, offered great suggestions, and delivered on time and on budget. The craftsmanship is outstanding."
-                    </p>
-                    <div class="flex items-center">
-                        <div class="bg-gray-700 rounded-full w-12 h-12 flex items-center justify-center">
-                            <i class="fas fa-user text-xl"></i>
+                    <div class="relative">
+                        <img src="https://picsum.photos/400/400?random=16" alt="Prescott Project" class="rounded-lg shadow-lg">
+                        <div class="absolute bottom-4 right-0 bg-white/90 px-6 py-2 font-bold text-gray-900">
+                            Prescott, AZ
                         </div>
-                        <div class="ml-4">
-                            <h4 class="font-bold">Sarah L.</h4>
-                            <p class="text-sm text-gray-400">Surprise, Arizona</p>
+                    </div>
+                    <div class="relative">
+                        <img src="https://picsum.photos/400/400?random=17" alt="Phoenix Project" class="rounded-lg shadow-lg">
+                        <div class="absolute bottom-4 right-0 bg-white/90 px-6 py-2 font-bold text-gray-900">
+                            Phoenix, AZ
+                        </div>
+                    </div>
+                    <div class="relative">
+                        <img src="https://picsum.photos/400/400?random=18" alt="Scottsdale Project" class="rounded-lg shadow-lg">
+                        <div class="absolute bottom-4 right-0 bg-white/90 px-6 py-2 font-bold text-gray-900">
+                            Scottsdale, AZ
+                        </div>
+                    </div>
+                    <div class="relative">
+                        <img src="https://picsum.photos/400/400?random=19" alt="Surprise Project" class="rounded-lg shadow-lg">
+                        <div class="absolute bottom-4 right-0 bg-white/90 px-6 py-2 font-bold text-gray-900">
+                            Surprise, AZ
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Emergency Section -->
+    <section id="emergency" class="relative overflow-hidden">
+        <!-- Background Video/Image -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://source.unsplash.com/1920x1080/?storm,weather" alt="Storm damage" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-black/50"></div>
+        </div>
+        
+        <div class="relative z-10 py-20">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl p-8 md:p-12">
+                    <div class="grid lg:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <h3 class="bg-red-600 text-white px-6 py-3 rounded-full inline-block font-bold text-xl mb-6">
+                                Emergency Roof Repair 24/7
+                            </h3>
+                            <h2 class="text-4xl md:text-5xl font-black text-gray-900 mb-4">
+                                Fast Emergency Roof Repairs When Disaster Strikes
+                            </h2>
+                            <p class="text-xl text-gray-700 mb-8">
+                                When disaster strikes, count on ABC ROOFS for immediate emergency roof repair in Phoenix and Prescott. Our 24/7 response team quickly addresses leaks, storm damage, and urgent roofing issues.
+                            </p>
+                            
+                            <!-- Emergency Services -->
+                            <div class="flex flex-wrap gap-6 mb-8">
+                                <div class="flex items-center gap-3">
+                                    <div class="bg-red-500 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold">
+                                        1
+                                    </div>
+                                    <span class="font-bold text-gray-900">Roof Storm Damage</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <div class="bg-red-500 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold">
+                                        2
+                                    </div>
+                                    <span class="font-bold text-gray-900">Insurance Claims</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <div class="bg-red-500 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold">
+                                        3
+                                    </div>
+                                    <span class="font-bold text-gray-900">Roof Tarping</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Trust Badges -->
+                            <div class="flex items-center gap-4 mb-8">
+                                <img src="https://via.placeholder.com/100x50/ffffff/cccccc?text=Logo" alt="ABC ROOFS" class="h-12">
+                                <img src="https://via.placeholder.com/80x50/ffffff/cccccc?text=5+Stars" alt="5 Stars" class="h-10">
+                                <img src="https://via.placeholder.com/80x50/ffffff/cccccc?text=Reviews" alt="Reviews" class="h-10">
+                            </div>
+                            
+                            <!-- CTA -->
+                            <div class="space-y-4">
+                                <p class="font-bold text-gray-900">Call Now: 24/7 Emergency Roof Repair Services Available!</p>
+                                <div class="flex flex-wrap gap-4">
+                                    <a href="tel:(623) 555-0123" class="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-bold transition">
+                                        <i class="fas fa-phone mr-2"></i>
+                                        Phoenix: (623) 555-0123
+                                    </a>
+                                    <a href="tel:(928) 555-0124" class="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-bold transition">
+                                        <i class="fas fa-phone mr-2"></i>
+                                        Prescott: (928) 555-0124
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Truck Image -->
+                        <div class="hidden lg:block">
+                            <img src="https://source.unsplash.com/600x400/?truck,construction" alt="Emergency Service Truck" class="w-full rounded-lg">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Financing Section -->
+    <section class="py-20 bg-gray-100 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h3 class="text-xl font-bold text-gray-700 mb-2">Easy Financing</h3>
+                    <h2 class="text-4xl font-black text-gray-900 mb-6">
+                        Monthly payment options from our trusted financing partners!
+                    </h2>
+                    <p class="text-gray-700 text-lg mb-8">
+                        Don't let cost stand in the way of your dream home. With fast approvals and flexible payment options, we make home improvements easier than ever.<br><br>
+                        Your Dream Home Is Within Reach — Finance It Today!
+                    </p>
+                    
+                    <div class="grid md:grid-cols-2 gap-4 mb-8">
+                        <div class="bg-white p-6 rounded-lg">
+                            <ul class="space-y-3">
+                                <li class="flex items-start gap-2">
+                                    <div class="w-2 h-2 rounded-full bg-blue-500 mt-2"></div>
+                                    <span class="font-semibold text-gray-800">Budget-Friendly Solutions</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <div class="w-2 h-2 rounded-full bg-blue-500 mt-2"></div>
+                                    <span class="font-semibold text-gray-800">No High Upfront Costs</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <div class="w-2 h-2 rounded-full bg-blue-500 mt-2"></div>
+                                    <span class="font-semibold text-gray-800">Quick Approval Process</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <div class="w-2 h-2 rounded-full bg-blue-500 mt-2"></div>
+                                    <span class="font-semibold text-gray-800">Flexible Payment Terms</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <div class="w-2 h-2 rounded-full bg-blue-500 mt-2"></div>
+                                    <span class="font-semibold text-gray-800">Protect Home Value</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-wrap items-center gap-6">
+                        <a href="#contact" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full font-bold transition">
+                            Learn More & Apply <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                        <div class="flex gap-4">
+                            <img src="https://via.placeholder.com/100x40/ffffff/cccccc?text=Finance+1" alt="Finance Partner" class="h-10">
+                            <img src="https://via.placeholder.com/100x40/ffffff/cccccc?text=Finance+2" alt="Finance Partner" class="h-10">
                         </div>
                     </div>
                 </div>
                 
-                <!-- Testimonial 3 -->
-                <div class="testimonial-card p-8 rounded-lg">
-                    <div class="flex items-center mb-4">
-                        <div class="text-yellow-500 text-2xl mr-2">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
-                    <p class="text-gray-300 mb-6 italic">
-                        "As a small business owner, I needed concrete work done for our parking lot. ABC ROOFS provided excellent service, competitive pricing, and completed the job ahead of schedule. Highly recommend!"
-                    </p>
-                    <div class="flex items-center">
-                        <div class="bg-gray-700 rounded-full w-12 h-12 flex items-center justify-center">
-                            <i class="fas fa-user text-xl"></i>
-                        </div>
-                        <div class="ml-4">
-                            <h4 class="font-bold">David T.</h4>
-                            <p class="text-sm text-gray-400">Surprise, Arizona</p>
-                        </div>
+                <!-- Phone Mockup -->
+                <div class="flex justify-center lg:justify-end">
+                    <div class="relative animate-float">
+                        <img src="https://source.unsplash.com/400x600/?finance,payment" alt="Financing App" class="rounded-2xl shadow-2xl max-w-sm">
                     </div>
                 </div>
             </div>
@@ -558,100 +1228,135 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-black">
+    <section id="contact" class="py-20 bg-gradient-to-br from-surface-container to-surface-container-lowest">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4 gold-text">CONTACT US</h2>
-                <div class="w-20 h-1 gold-bg mx-auto mb-6"></div>
-                <p class="text-xl max-w-3xl mx-auto">
-                    Ready to start your project? Get in touch for a free estimate today!
+                <h2 class="text-4xl font-black mb-4 primary-text">Get In Touch</h2>
+                <div class="w-20 h-1 primary-bg mx-auto mb-6"></div>
+                <p class="text-xl max-w-3xl mx-auto text-gray-300">
+                    Whether you need a quick repair or a full roof replacement, our experienced team is here to help. Fill out the form below and we'll get back to you shortly.
                 </p>
             </div>
             
-            <div class="flex flex-col lg:flex-row gap-10">
-                <div class="lg:w-1/2">
+            <div class="grid lg:grid-cols-5 gap-12">
+                <div class="lg:col-span-3">
                     <form class="space-y-6">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
-                                <label for="name" class="block text-sm font-medium text-white mb-1">Name</label>
-                                <input type="text" id="name" name="name" class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500" required="">
+                                <label class="block text-sm font-medium mb-2">First Name</label>
+                                <input type="text" class="w-full px-4 py-3 bg-surface-container-high border border-gray-700 rounded-lg focus:outline-none focus:border-green-500">
                             </div>
                             <div>
-                                <label for="email" class="block text-sm font-medium text-white mb-1">Email</label>
-                                <input type="email" id="email" name="email" class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500" required="">
+                                <label class="block text-sm font-medium mb-2">Last Name</label>
+                                <input type="text" class="w-full px-4 py-3 bg-surface-container-high border border-gray-700 rounded-lg focus:outline-none focus:border-green-500">
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Email</label>
+                                <input type="email" class="w-full px-4 py-3 bg-surface-container-high border border-gray-700 rounded-lg focus:outline-none focus:border-green-500">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Phone</label>
+                                <input type="tel" class="w-full px-4 py-3 bg-surface-container-high border border-gray-700 rounded-lg focus:outline-none focus:border-green-500">
                             </div>
                         </div>
                         <div>
-                            <label for="phone" class="block text-sm font-medium text-white mb-1">Phone</label>
-                            <input type="tel" id="phone" name="phone" class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500" required="">
+                            <label class="block text-sm font-medium mb-2">Address</label>
+                            <input type="text" class="w-full px-4 py-3 bg-surface-container-high border border-gray-700 rounded-lg focus:outline-none focus:border-green-500">
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium mb-2">City</label>
+                                <input type="text" class="w-full px-4 py-3 bg-surface-container-high border border-gray-700 rounded-lg focus:outline-none focus:border-green-500">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2">State</label>
+                                <select class="w-full px-4 py-3 bg-surface-container-high border border-gray-700 rounded-lg focus:outline-none focus:border-green-500">
+                                    <option>Arizona</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2">ZIP</label>
+                                <input type="text" class="w-full px-4 py-3 bg-surface-container-high border border-gray-700 rounded-lg focus:outline-none focus:border-green-500">
+                            </div>
                         </div>
                         <div>
-                            <label for="service" class="block text-sm font-medium text-white mb-1">Service Needed</label>
-                            <select id="service" name="service" class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500" required="">
-                                <option value="">Select a service</option>
-                                <option value="Roofing">Roofing</option>
-                                <option value="Concrete">Concrete</option>
-                                <option value="Stucco">Stucco</option>
-                                <option value="Framing">Framing</option>
-                                <option value="Interior Remodeling">Interior Remodeling</option>
-                                <option value="Other">Other</option>
-                            </select>
+                            <label class="block text-sm font-medium mb-2">Message</label>
+                            <textarea rows="4" class="w-full px-4 py-3 bg-surface-container-high border border-gray-700 rounded-lg focus:outline-none focus:border-green-500"></textarea>
                         </div>
-                        <div>
-                            <label for="message" class="block text-sm font-medium text-white mb-1">Message</label>
-                            <textarea id="message" name="message" rows="4" class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500" required=""></textarea>
-                        </div>
-                        <div>
-                            <button type="submit" class="gold-bg text-black font-bold py-3 px-8 rounded-md hover:bg-yellow-600 transition duration-300 w-full">
-                                REQUEST FREE ESTIMATE
-                            </button>
-                        </div>
+                        <button type="submit" class="btn-primary w-full py-3 rounded-lg text-lg font-bold">
+                            Submit
+                        </button>
                     </form>
                 </div>
                 
-                <div class="lg:w-1/2">
-                    <div class="bg-gray-900 p-8 rounded-lg h-full">
-                        <h3 class="text-2xl font-bold mb-6 gold-text">CONTACT INFORMATION</h3>
-                        <div class="space-y-6">
-                            <div class="flex items-start">
-                                <i class="fas fa-map-marker-alt text-2xl gold-text mt-1 mr-4"></i>
-                                <div>
-                                    <h4 class="text-lg font-bold mb-1">LOCATION</h4>
-                                    <p class="text-gray-300">Serving Surprise, Arizona and surrounding areas</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start">
-                                <i class="fas fa-phone-alt text-2xl gold-text mt-1 mr-4"></i>
-                                <div>
-                                    <h4 class="text-lg font-bold mb-1">PHONE</h4>
-                                    <a href="tel:2099387088" class="text-gray-300 hover:text-white">2099387088</a>
-                                </div>
-                            </div>
-                            <div class="flex items-start">
-                                <i class="fas fa-envelope text-2xl gold-text mt-1 mr-4"></i>
-                                <div>
-                                    <h4 class="text-lg font-bold mb-1">EMAIL</h4>
-                                    <a href="mailto:ABCROOF@gmail.com" class="text-gray-300 hover:text-white">ABCROOF@gmail.com</a>
-                                </div>
-                            </div>
-                            <div class="flex items-start">
-                                <i class="fas fa-clock text-2xl gold-text mt-1 mr-4"></i>
-                                <div>
-                                    <h4 class="text-lg font-bold mb-1">HOURS</h4>
-                                    <p class="text-gray-300">Monday - Friday: 8:00 AM - 6:00 PM</p>
-                                    <p class="text-gray-300">Saturday: 9:00 AM - 2:00 PM</p>
-                                    <p class="text-gray-300">Sunday: Closed</p>
+                <div class="lg:col-span-2">
+                    <h3 class="text-2xl font-bold mb-8 primary-text">Contact Information</h3>
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <i class="fas fa-map-marker-alt primary-text text-xl mt-1 mr-4"></i>
+                            <div>
+                                <h4 class="font-bold mb-1">Locations</h4>
+                                <div class="text-gray-300 space-y-3">
+                                    <div>
+                                        <p class="font-semibold">Phoenix, AZ</p>
+                                        <p>2401 W Behrend Dr. Suite 33, Phoenix, AZ 85027</p>
+                                        <a href="tel:(623) 555-0123" class="hover:text-white">(623) 555-0123</a>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold">Prescott, AZ</p>
+                                        <p>Industrial Way, Prescott, AZ 86301</p>
+                                        <a href="tel:(928) 555-0124" class="hover:text-white">(928) 555-0124</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        
-                        <div class="mt-10">
-                            <h3 class="text-2xl font-bold mb-6 gold-text">SERVICE AREA</h3>
-                            <div class="bg-gray-800 p-4 rounded-md">
-                                <p class="text-gray-300">
-                                    We proudly serve communities around Surprise, Arizona.
-                                </p>
+                        <div class="flex items-start">
+                            <i class="fas fa-envelope primary-text text-xl mt-1 mr-4"></i>
+                            <div>
+                                <h4 class="font-bold mb-1">Email</h4>
+                                <a href="mailto:info@abcroofs.com" class="text-gray-300 hover:text-white">info@abcroofs.com</a>
                             </div>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-clock primary-text text-xl mt-1 mr-4"></i>
+                            <div>
+                                <h4 class="font-bold mb-1">Office Hours</h4>
+                                <p class="text-gray-300">Mon - Fri: 6:00 AM - 6:00 PM</p>
+                                <p class="text-gray-300">Sat: 8:00 AM - 12:00 PM</p>
+                                <p class="text-gray-300">Sun: Emergency Service Only</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-certificate primary-text text-xl mt-1 mr-4"></i>
+                            <div>
+                                <h4 class="font-bold mb-1">Licenses</h4>
+                                <p class="text-gray-300">ROC # CR-42-321606</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Social Media -->
+                    <div class="mt-8">
+                        <h4 class="font-bold mb-4">Follow Us</h4>
+                        <div class="flex space-x-4">
+                            <a href="#" class="bg-surface-container-high p-3 rounded-full hover:bg-green-600 transition">
+                                <i class="fab fa-facebook text-xl"></i>
+                            </a>
+                            <a href="#" class="bg-surface-container-high p-3 rounded-full hover:bg-green-600 transition">
+                                <i class="fab fa-instagram text-xl"></i>
+                            </a>
+                            <a href="#" class="bg-surface-container-high p-3 rounded-full hover:bg-green-600 transition">
+                                <i class="fab fa-youtube text-xl"></i>
+                            </a>
+                            <a href="#" class="bg-surface-container-high p-3 rounded-full hover:bg-green-600 transition">
+                                <i class="fab fa-linkedin text-xl"></i>
+                            </a>
+                            <a href="#" class="bg-surface-container-high p-3 rounded-full hover:bg-green-600 transition">
+                                <i class="fab fa-tiktok text-xl"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -660,76 +1365,79 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 py-12 border-t border-gray-800">
+    <footer class="bg-surface-container-lowest py-12 border-t border-gray-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
                 <div class="md:col-span-2">
                     <div class="flex items-center mb-4" id="footerLogoContainer">
-                        <i class="fas fa-home text-3xl gold-text mr-2" id="footerDefaultIcon" style="display: block;"></i>
-                        <img id="footerCustomLogo" src="" alt="Logo" class="h-8 mr-2" style="display: none;">
-                        <span class="text-xl font-bold text-white">
-                            <span class="gold-text">ABC ROOFS</span>
+                        <i class="fas fa-home text-3xl primary-text mr-3" id="footerDefaultIcon"></i>
+                        <img id="footerCustomLogo" src="" alt="Logo" class="h-10 mr-3" style="display: none;">
+                        <span class="text-2xl font-bold">
+                            <span class="primary-text">ABC</span> ROOFS
                         </span>
                     </div>
                     <p class="text-gray-400 mb-4">
-                        Your trusted partner for quality construction services in Surprise, Arizona and surrounding areas.
+                        Your trusted roofing contractor serving Surprise, Arizona and surrounding areas with excellence since 2016.
                     </p>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-white text-xl">
-                            <i class="fab fa-facebook"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-white text-xl">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-white text-xl">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-white text-xl">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
+                </div>
+                
+                <div>
+                    <h3 class="font-bold mb-4 primary-text">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#services" class="text-gray-400 hover:text-white flex items-center gap-2">
+                            <i class="fas fa-chevron-right text-xs"></i> Service Areas
+                        </a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-white flex items-center gap-2">
+                            <i class="fas fa-chevron-right text-xs"></i> Residential
+                        </a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white flex items-center gap-2">
+                            <i class="fas fa-chevron-right text-xs"></i> Contact
+                        </a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-white flex items-center gap-2">
+                            <i class="fas fa-chevron-right text-xs"></i> Commercial
+                        </a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-bold mb-4 primary-text">Office Hours</h3>
+                    <div class="space-y-2 text-gray-400">
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-calendar text-xs"></i>
+                            <span>Mon - Fri: 6:00 AM - 6:00 PM</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-calendar text-xs"></i>
+                            <span>Sat: 8:00 AM - 12:00 PM</span>
+                        </div>
                     </div>
-                </div>
-                
-                <div>
-                    <h3 class="text-lg font-bold text-white mb-4">QUICK LINKS</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#home" class="text-gray-400 hover:text-white">Home</a></li>
-                        <li><a href="#services" class="text-gray-400 hover:text-white">Services</a></li>
-                        <li><a href="#about" class="text-gray-400 hover:text-white">About Us</a></li>
-                        <li><a href="#testimonials" class="text-gray-400 hover:text-white">Testimonials</a></li>
-                        <li><a href="#contact" class="text-gray-400 hover:text-white">Contact</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h3 class="text-lg font-bold text-white mb-4">OUR SERVICES</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#services" class="text-gray-400 hover:text-white">Roofing</a></li>
-                        <li><a href="#services" class="text-gray-400 hover:text-white">Concrete</a></li>
-                        <li><a href="#services" class="text-gray-400 hover:text-white">Stucco</a></li>
-                        <li><a href="#services" class="text-gray-400 hover:text-white">Framing</a></li>
-                        <li><a href="#services" class="text-gray-400 hover:text-white">Interior Remodeling</a></li>
-                    </ul>
+                    
+                    <h3 class="font-bold mb-2 primary-text mt-6">Licenses</h3>
+                    <div class="text-gray-400">
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-certificate text-xs"></i>
+                            <span>ROC # <strong>CR-42-321606</strong></span>
+                        </div>
+                    </div>
                 </div>
             </div>
             
-            <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
                 <p class="text-gray-400 mb-4 md:mb-0">
-                    © 2023 ABC ROOFS LLC. All rights reserved.
+                    © 2024 ABC ROOFS LLC. All rights reserved.
                 </p>
                 <div class="flex space-x-6">
                     <a href="#" class="text-gray-400 hover:text-white text-sm">Privacy Policy</a>
                     <a href="#" class="text-gray-400 hover:text-white text-sm">Terms of Service</a>
-                    <a href="#" class="text-gray-400 hover:text-white text-sm">Licenses</a>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- Floating Call Button (Mobile Only) -->
+    <!-- Floating Call Button (Mobile) -->
     <div class="md:hidden fixed bottom-6 right-6 z-50">
-        <a href="tel:2099387088" class="gold-bg text-black font-bold rounded-full w-16 h-16 flex items-center justify-center shadow-lg hover:bg-yellow-600 transition duration-300">
-            <i class="fas fa-phone-alt text-2xl"></i>
+        <a href="tel:(623) 555-0123" class="primary-bg text-black rounded-full w-16 h-16 flex items-center justify-center shadow-lg animate-bounce">
+            <i class="fas fa-phone text-2xl"></i>
         </a>
     </div>
 
@@ -819,29 +1527,173 @@
                 '<button class="show-editor-btn" id="showEditorBtn" onclick="showEditor()" style="display: none;">'
             );
             
-            // Add the URL parameter check in the initialization
-            cleanedHTML = cleanedHTML.replace(
-                'document.addEventListener(\'DOMContentLoaded\', function() {',
-                `document.addEventListener('DOMContentLoaded', function() {
-                    // Hide editor by default, only show with ?edit=true
-                    if (window.location.search.includes('edit=true')) {
-                        document.getElementById('editForm').style.display = 'block';
-                        document.getElementById('showEditorBtn').style.display = 'none';
-                    } else {
-                        document.getElementById('editForm').style.display = 'none';
-                        document.getElementById('showEditorBtn').style.display = 'none';
-                    }
-                    // Hide editor by default, only show with ?edit=true
-                    if (window.location.search.includes('edit=true')) {
-                        document.getElementById('editForm').style.display = 'block';
-                        document.getElementById('showEditorBtn').style.display = 'none';
-                    } else {
-                        document.getElementById('editForm').style.display = 'none';
-                        document.getElementById('showEditorBtn').style.display = 'none';
-                    }`
-            );
-            
             return cleanedHTML;
+        }
+
+        // Image upload functions
+        function handleImageUpload(inputId, callback) {
+            const fileInput = document.getElementById(inputId);
+            const file = fileInput.files[0];
+            
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    callback(e.target.result);
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function updateImage(type) {
+            if (type === 'hero') {
+                const urlInput = document.getElementById('heroImageUrl').value;
+                const fileInput = document.getElementById('heroImageUpload');
+                
+                if (urlInput) {
+                    updateHeroBackground(urlInput);
+                } else if (fileInput.files.length > 0) {
+                    handleImageUpload('heroImageUpload', updateHeroBackground);
+                } else {
+                    alert('Please provide an image URL or upload a file');
+                }
+            }
+        }
+
+        function updateHeroBackground(imageUrl) {
+            const heroSection = document.querySelector('.hero');
+            if (heroSection) {
+                heroSection.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('${imageUrl}')`;
+                alert('Hero background updated!');
+            }
+        }
+
+        function updateAboutGallery() {
+            const images = [
+                document.getElementById('aboutImg1').value,
+                document.getElementById('aboutImg2').value,
+                document.getElementById('aboutImg3').value,
+                document.getElementById('aboutImg4').value
+            ];
+            
+            const galleryImages = document.querySelectorAll('#about .grid-cols-2 img');
+            images.forEach((url, index) => {
+                if (url && galleryImages[index]) {
+                    galleryImages[index].src = url;
+                }
+            });
+            
+            if (images.some(url => url)) {
+                alert('About gallery updated!');
+            } else {
+                alert('Please provide at least one image URL');
+            }
+        }
+
+        function updateServiceImage() {
+            const serviceSelect = document.getElementById('serviceSelect').value;
+            const urlInput = document.getElementById('serviceImageUrl').value;
+            const fileInput = document.getElementById('serviceImageUpload');
+            
+            if (!serviceSelect) {
+                alert('Please select a service first');
+                return;
+            }
+            
+            if (urlInput) {
+                applyServiceImage(serviceSelect, urlInput);
+            } else if (fileInput.files.length > 0) {
+                handleImageUpload('serviceImageUpload', (url) => applyServiceImage(serviceSelect, url));
+            } else {
+                alert('Please provide an image URL or upload a file');
+            }
+        }
+
+        function applyServiceImage(serviceId, imageUrl) {
+            const serviceMap = {
+                'service1': 0, 'service2': 1, 'service3': 2,
+                'service4': 3, 'service5': 4, 'service6': 5,
+                'commercial1': 6, 'commercial2': 7, 'commercial3': 8
+            };
+            
+            const serviceCards = document.querySelectorAll('.service-card img');
+            const index = serviceMap[serviceId];
+            
+            if (serviceCards[index]) {
+                serviceCards[index].src = imageUrl;
+                alert('Service image updated!');
+            }
+        }
+
+        function updateProjectGallery() {
+            const galleryUrls = [
+                document.getElementById('gallery1').value,
+                document.getElementById('gallery2').value,
+                document.getElementById('gallery3').value,
+                document.getElementById('gallery4').value,
+                document.getElementById('gallery5').value
+            ];
+            
+            const galleryImages = document.querySelectorAll('.scroll-container img');
+            galleryUrls.forEach((url, index) => {
+                if (url && galleryImages[index]) {
+                    galleryImages[index].src = url;
+                }
+            });
+            
+            if (galleryUrls.some(url => url)) {
+                alert('Project gallery updated!');
+            } else {
+                alert('Please provide at least one image URL');
+            }
+        }
+
+        function updateOtherImages() {
+            const updates = {
+                process: document.getElementById('processImage').value,
+                emergencyBg: document.getElementById('emergencyBg').value,
+                emergencyTruck: document.getElementById('emergencyTruck').value,
+                finance: document.getElementById('financeImage').value
+            };
+            
+            let updated = false;
+            
+            if (updates.process) {
+                const processImg = document.querySelector('section:has(.process-card) img');
+                if (processImg) {
+                    processImg.src = updates.process;
+                    updated = true;
+                }
+            }
+            
+            if (updates.emergencyBg) {
+                const emergencySection = document.querySelector('#emergency .absolute img');
+                if (emergencySection) {
+                    emergencySection.src = updates.emergencyBg;
+                    updated = true;
+                }
+            }
+            
+            if (updates.emergencyTruck) {
+                const truckImg = document.querySelector('#emergency .hidden.lg\\:block img');
+                if (truckImg) {
+                    truckImg.src = updates.emergencyTruck;
+                    updated = true;
+                }
+            }
+            
+            if (updates.finance) {
+                const financeImg = document.querySelector('.animate-float img[alt="Financing App"]');
+                if (financeImg) {
+                    financeImg.src = updates.finance;
+                    updated = true;
+                }
+            }
+            
+            if (updated) {
+                alert('Images updated successfully!');
+            } else {
+                alert('Please provide at least one image URL');
+            }
         }
 
         // Logo handling functions
@@ -898,10 +1750,10 @@
         // Color preset functions
         function applyColorPreset(preset) {
             const presets = {
-                gold: { accent: '#D4AF37', bg: '#000000', text: '#ffffff', section: '#111827' },
+                green: { accent: '#3fc138', bg: '#000000', text: '#ffffff', section: '#1a1a1a' },
                 blue: { accent: '#2563eb', bg: '#0f172a', text: '#ffffff', section: '#1e293b' },
                 red: { accent: '#dc2626', bg: '#0f0f0f', text: '#ffffff', section: '#1f1f1f' },
-                green: { accent: '#16a34a', bg: '#0a0a0a', text: '#ffffff', section: '#1a1a1a' },
+                gold: { accent: '#D4AF37', bg: '#000000', text: '#ffffff', section: '#111827' },
                 orange: { accent: '#ea580c', bg: '#0c0c0c', text: '#ffffff', section: '#1c1c1c' },
                 purple: { accent: '#9333ea', bg: '#0d0d0d', text: '#ffffff', section: '#1d1d1d' }
             };
@@ -916,166 +1768,72 @@
         // Quick Editor Functions
         function updateSite() {
             const company = document.getElementById('companyName').value || 'ABC ROOFS';
-            const phone = document.getElementById('phoneNum').value || '2099387088';
-            const email = document.getElementById('emailAddr').value || 'ABCROOF@gmail.com';
+            const phone = document.getElementById('phoneNum').value || '(623) 555-0123';
+            const phone2 = document.getElementById('phoneNum2').value || '(928) 555-0124';
+            const email = document.getElementById('emailAddr').value || 'info@abcroofs.com';
             const location = document.getElementById('locationAddr').value || 'Surprise, Arizona';
             
             // Get color values
-            const accentColor = document.getElementById('accentColor').value || '#D4AF37';
+            const accentColor = document.getElementById('accentColor').value || '#3fc138';
             const bgColor = document.getElementById('bgColor').value || '#000000';
             const textColor = document.getElementById('textColor').value || '#ffffff';
-            const sectionBgColor = document.getElementById('sectionBgColor').value || '#111827';
+            const sectionBgColor = document.getElementById('sectionBgColor').value || '#1a1a1a';
             
             // Get logo values
             const logoUrl = document.getElementById('logoUrl').value || '';
             
-            console.log('Updating site with colors:', accentColor, bgColor, textColor, sectionBgColor);
+            // Update text content
+            updateTextContent(company, phone, phone2, email, location);
             
-            // Update text content using a more reliable method
-            updateTextContent(company, phone, email, location);
-            
-            // Apply color changes via CSS
+            // Apply color changes
             applyColorScheme(accentColor, bgColor, textColor, sectionBgColor);
             
             // Apply logo changes
             applyLogo(logoUrl);
-            
-            // Mark as customized so initializeSite doesn't override
-            document.body.dataset.customized = 'true';
         }
 
-        function updateTextContent(company, phone, email, location) {
-            console.log('Starting text update with:', { company, phone, email, location });
+        function updateTextContent(company, phone, phone2, email, location) {
+            // Update all text content
+            document.querySelectorAll('*').forEach(el => {
+                if (el.childNodes.length === 1 && el.childNodes[0].nodeType === 3) {
+                    el.textContent = el.textContent.replace(/ABC ROOFS/g, company);
+                    el.textContent = el.textContent.replace(/ABC/g, company.split(' ')[0]);
+                    el.textContent = el.textContent.replace(/\(623\) 555-0123/g, phone);
+                    el.textContent = el.textContent.replace(/\(928\) 555-0124/g, phone2);
+                    el.textContent = el.textContent.replace(/info@abcroofs\.com/g, email);
+                    el.textContent = el.textContent.replace(/Surprise, Arizona/g, location);
+                }
+            });
             
-            // Simple and reliable method - update innerHTML with global replace
-            let bodyHTML = document.body.innerHTML;
+            // Update attributes
+            document.querySelectorAll('a[href^="tel:"]').forEach(el => {
+                if (el.href.includes('623')) {
+                    el.href = `tel:${phone}`;
+                } else if (el.href.includes('928')) {
+                    el.href = `tel:${phone2}`;
+                }
+            });
             
-            // Replace all placeholders
-            bodyHTML = bodyHTML.replace(/\{\{COMPANY_NAME\}\}/g, company);
-            bodyHTML = bodyHTML.replace(/\{\{PHONE\}\}/g, phone);
-            bodyHTML = bodyHTML.replace(/\{\{EMAIL\}\}/g, email);
-            bodyHTML = bodyHTML.replace(/\{\{LOCATION\}\}/g, location);
-            
-            // Also replace any remaining default values
-            bodyHTML = bodyHTML.replace(/ABC ROOFS/g, company);
-            bodyHTML = bodyHTML.replace(/\2099387088/g, phone);
-            bodyHTML = bodyHTML.replace(/suns\.constructionllc@gmail\.com/g, email);
-            bodyHTML = bodyHTML.replace(/Surprise, Arizona/g, location);
-            bodyHTML = bodyHTML.replace(/SURPRISE/g, location.split(',')[0].toUpperCase());
-            
-            // Update the body
-            document.body.innerHTML = bodyHTML;
+            document.querySelectorAll('a[href^="mailto:"]').forEach(el => {
+                el.href = `mailto:${email}`;
+            });
             
             // Update page title
-            document.title = `${company} | Roofing & Construction Services in ${location}`;
-            
-            console.log('Text content updated successfully');
-            
-            // Re-attach event listeners after innerHTML change
-            setTimeout(() => {
-                attachEventListeners();
-            }, 100);
-        }
-        
-        function attachEventListeners() {
-            // Re-attach mobile menu listener
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            if (mobileMenuButton) {
-                mobileMenuButton.addEventListener('click', function() {
-                    const menu = document.getElementById('mobile-menu');
-                    if (menu) menu.classList.toggle('hidden');
-                });
-            }
-            
-            // Re-attach logo listeners
-            const logoUpload = document.getElementById('logoUpload');
-            const logoUrl = document.getElementById('logoUrl');
-            const hideLogo = document.getElementById('hideLogo');
-            
-            if (logoUpload) {
-                logoUpload.addEventListener('change', handleLogoUpload);
-            }
-            if (logoUrl) {
-                logoUrl.addEventListener('input', function() {
-                    applyLogo(this.value);
-                });
-            }
-            if (hideLogo) {
-                hideLogo.addEventListener('change', function() {
-                    const logoUrlValue = document.getElementById('logoUrl').value || '';
-                    applyLogo(logoUrlValue);
-                });
-            }
+            document.title = `${company} | Professional Roofing Services in ${location}`;
         }
 
         function applyColorScheme(accent, bg, text, sectionBg) {
-            // Create or update dynamic styles
-            let styleElement = document.getElementById('dynamicStyles');
-            if (!styleElement) {
-                styleElement = document.createElement('style');
-                styleElement.id = 'dynamicStyles';
-                document.head.appendChild(styleElement);
-            }
+            document.documentElement.style.setProperty('--primary-color', accent);
+            document.documentElement.style.setProperty('--primary-dark', adjustBrightness(accent, -20));
+            document.documentElement.style.setProperty('--surface-container', sectionBg);
+            document.documentElement.style.setProperty('--surface-container-high', adjustBrightness(sectionBg, 10));
+            document.documentElement.style.setProperty('--surface-container-lowest', adjustBrightness(bg, -10));
             
-            const darkerAccent = adjustBrightness(accent, -20);
-            const lighterSection = adjustBrightness(sectionBg, 20);
-            const borderColor = adjustBrightness(sectionBg, 30);
-            
-            styleElement.textContent = `
-                /* Background Colors */
-                body { background-color: ${bg} !important; color: ${text} !important; }
-                .bg-gray-900 { background-color: ${sectionBg} !important; }
-                .bg-gray-800 { background-color: ${lighterSection} !important; }
-                .bg-black { background-color: ${bg} !important; }
-                
-                /* Accent Colors - All variations */
-                .gold-text { color: ${accent} !important; }
-                .gold-border { border-color: ${accent} !important; }
-                .gold-bg { background-color: ${accent} !important; }
-                
-                /* Text Colors */
-                .text-white { color: ${text} !important; }
-                .text-yellow-500 { color: ${accent} !important; }
-                
-                /* Border Colors */
-                .border-gray-800 { border-color: ${borderColor} !important; }
-                .border-gray-700 { border-color: ${lighterSection} !important; }
-                
-                /* Hover States */
-                .hover\\:bg-yellow-600:hover { background-color: ${darkerAccent} !important; }
-                .hover\\:bg-yellow-700:hover { background-color: ${darkerAccent} !important; }
-                .btn-gold:hover { background-color: ${darkerAccent} !important; }
-                
-                /* Focus States */
-                .focus\\:ring-yellow-500:focus { --tw-ring-color: ${accent} !important; }
-                
-                /* Line Separators - Fix these specifically */
-                .bg-yellow-600 { background-color: ${accent} !important; }
-                
-                /* Star ratings */
-                .fas.fa-star { color: ${accent} !important; }
-                
-                /* Links and highlights */
-                .nav-link:hover { color: ${accent} !important; }
-                
-                /* Mobile floating button */
-                .md\\:hidden .gold-bg { background-color: ${accent} !important; }
-                
-                /* All elements with specific gold/yellow classes */
-                [class*="yellow-"], [class*="gold-"] {
-                    --accent-color: ${accent};
-                }
-                
-                /* Override any remaining yellow/gold colors */
-                *[style*="color: #D4AF37"], *[style*="background-color: #D4AF37"] {
-                    color: ${accent} !important;
-                    background-color: ${accent} !important;
-                }
-            `;
+            document.body.style.backgroundColor = bg;
+            document.body.style.color = text;
         }
 
         function adjustBrightness(hex, percent) {
-            // Convert hex to RGB
             const num = parseInt(hex.replace("#", ""), 16);
             const amt = Math.round(2.55 * percent);
             const R = (num >> 16) + amt;
@@ -1084,15 +1842,6 @@
             return "#" + (0x1000000 + (R < 255 ? R < 1 ? 0 : R : 255) * 0x10000 +
                 (G < 255 ? G < 1 ? 0 : G : 255) * 0x100 +
                 (B < 255 ? B < 1 ? 0 : B : 255)).toString(16).slice(1);
-        }
-
-        // Initialize the site with ABC ROOFS details on load
-        function initializeSite() {
-            // Only update if we haven't customized yet
-            if (!document.body.dataset.customized) {
-                updateSite();
-                document.body.dataset.customized = 'true';
-            }
         }
 
         function hideEditor() {
@@ -1105,7 +1854,15 @@
             document.getElementById('showEditorBtn').style.display = 'none';
         }
 
-        function initializeScripts() {
+        // Initialize scripts on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check URL parameter for edit mode
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('edit') === 'true') {
+                document.getElementById('editForm').style.display = 'block';
+                document.getElementById('showEditorBtn').style.display = 'none';
+            }
+            
             // Mobile menu toggle
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             if (mobileMenuButton) {
@@ -1122,14 +1879,12 @@
                 });
             });
             
-            // Smooth scrolling for navigation links
+            // Smooth scrolling
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function(e) {
                     e.preventDefault();
-                    
                     const targetId = this.getAttribute('href');
                     const targetElement = document.querySelector(targetId);
-                    
                     if (targetElement) {
                         window.scrollTo({
                             top: targetElement.offsetTop - 80,
@@ -1140,45 +1895,14 @@
             });
             
             // Form submission
-            const form = document.querySelector('form');
-            if (form) {
+            const forms = document.querySelectorAll('form');
+            forms.forEach(form => {
                 form.addEventListener('submit', function(e) {
                     e.preventDefault();
                     alert('Thank you for your request! We will contact you shortly.');
                     form.reset();
                 });
-            }
-        }
-
-        // Initialize scripts on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            // ALWAYS show editor if ?edit=true is in URL
-            const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.get('edit') === 'true') {
-                console.log('Edit mode detected - showing editor');
-                const editForm = document.getElementById('editForm');
-                const showBtn = document.getElementById('showEditorBtn');
-                if (editForm) {
-                    editForm.style.display = 'block';
-                    console.log('Editor form shown');
-                }
-                if (showBtn) {
-                    showBtn.style.display = 'none';
-                }
-            } else {
-                console.log('Normal mode - hiding editor');
-                const editForm = document.getElementById('editForm');
-                const showBtn = document.getElementById('showEditorBtn');
-                if (editForm) {
-                    editForm.style.display = 'none';
-                }
-                if (showBtn) {
-                    showBtn.style.display = 'none';
-                }
-            }
-            
-            initializeSite();
-            initializeScripts();
+            });
             
             // Add logo upload listener
             const logoUpload = document.getElementById('logoUpload');
@@ -1201,6 +1925,5 @@
             }
         });
     </script>
-
-
-</body></html>
+</body>
+</html>
