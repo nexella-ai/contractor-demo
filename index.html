@@ -477,8 +477,8 @@
             </div>
         </div>
         
-        <button class="update-btn">Update Site</button>
-        <button class="update-btn" style="background: #16a34a; margin-left: 4px;">Save to GitHub</button>
+        <button class="update-btn" onclick="updateSite()">Update Site</button>
+        <button class="update-btn" onclick="saveToGitHub(event)" style="background: #16a34a; margin-left: 4px;">Save to GitHub</button>
     </div>
     
     <!-- Check for edit mode immediately after editor -->
@@ -1571,7 +1571,7 @@
         // GitHub API functions
 
         // GitHub API functions
-        async function saveToGitHub() {
+        async function saveToGitHub(event) {
             const token = document.getElementById('githubToken').value;
             const repo = document.getElementById('githubRepo').value;
             
@@ -1580,7 +1580,7 @@
                 return;
             }
 
-            const saveBtn = event.target;
+            const saveBtn = event ? event.target : document.querySelector('.update-btn[style*="16a34a"]');
             const originalText = saveBtn.textContent;
             
             try {
@@ -2308,11 +2308,19 @@
             updateBtns.forEach(btn => {
                 if (btn.textContent.includes('Update Site')) {
                     btn.addEventListener('click', function() {
-                        updateSite();
+                        if (typeof updateSite === 'function') {
+                            updateSite();
+                        } else {
+                            console.error('updateSite function not found');
+                        }
                     });
                 } else if (btn.textContent.includes('Save to GitHub')) {
                     btn.addEventListener('click', function() {
-                        saveToGitHub();
+                        if (typeof saveToGitHub === 'function') {
+                            saveToGitHub();
+                        } else {
+                            console.error('saveToGitHub function not found');
+                        }
                     });
                 }
             });
