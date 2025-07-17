@@ -1544,6 +1544,35 @@
     </div>
 
     <script>
+        // Editor visibility functions (define these first)
+        function hideEditor() {
+            document.getElementById('editForm').style.display = 'none';
+            document.getElementById('showEditorBtn').style.display = 'block';
+        }
+
+        function showEditor() {
+            document.getElementById('editForm').style.display = 'block';
+            document.getElementById('showEditorBtn').style.display = 'none';
+        }
+
+        // Color preset functions
+        function applyColorPreset(preset) {
+            const presets = {
+                green: { accent: '#3fc138', bg: '#000000', text: '#ffffff', section: '#1a1a1a' },
+                blue: { accent: '#2563eb', bg: '#0f172a', text: '#ffffff', section: '#1e293b' },
+                red: { accent: '#dc2626', bg: '#0f0f0f', text: '#ffffff', section: '#1f1f1f' },
+                gold: { accent: '#D4AF37', bg: '#000000', text: '#ffffff', section: '#111827' },
+                orange: { accent: '#ea580c', bg: '#0c0c0c', text: '#ffffff', section: '#1c1c1c' },
+                purple: { accent: '#9333ea', bg: '#0d0d0d', text: '#ffffff', section: '#1d1d1d' }
+            };
+            
+            const colors = presets[preset];
+            document.getElementById('accentColor').value = colors.accent;
+            document.getElementById('bgColor').value = colors.bg;
+            document.getElementById('textColor').value = colors.text;
+            document.getElementById('sectionBgColor').value = colors.section;
+        }
+
         // GitHub API functions
         async function saveToGitHub() {
             const token = document.getElementById('githubToken').value;
@@ -1907,24 +1936,6 @@
                 if (defaultIcon) defaultIcon.style.display = 'block';
                 if (footerDefaultIcon) footerDefaultIcon.style.display = 'block';
             }
-        }
-
-        // Color preset functions
-        function applyColorPreset(preset) {
-            const presets = {
-                green: { accent: '#3fc138', bg: '#000000', text: '#ffffff', section: '#1a1a1a' },
-                blue: { accent: '#2563eb', bg: '#0f172a', text: '#ffffff', section: '#1e293b' },
-                red: { accent: '#dc2626', bg: '#0f0f0f', text: '#ffffff', section: '#1f1f1f' },
-                gold: { accent: '#D4AF37', bg: '#000000', text: '#ffffff', section: '#111827' },
-                orange: { accent: '#ea580c', bg: '#0c0c0c', text: '#ffffff', section: '#1c1c1c' },
-                purple: { accent: '#9333ea', bg: '#0d0d0d', text: '#ffffff', section: '#1d1d1d' }
-            };
-            
-            const colors = presets[preset];
-            document.getElementById('accentColor').value = colors.accent;
-            document.getElementById('bgColor').value = colors.bg;
-            document.getElementById('textColor').value = colors.text;
-            document.getElementById('sectionBgColor').value = colors.section;
         }
 
         // Quick Editor Functions
