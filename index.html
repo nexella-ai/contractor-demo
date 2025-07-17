@@ -238,7 +238,6 @@
             cursor: pointer;
             font-weight: bold;
             z-index: 9998;
-            display: none;
         }
 
         /* Animations */
@@ -2283,6 +2282,9 @@
             if (urlParams.get('edit') === 'true') {
                 document.getElementById('editForm').style.display = 'block';
                 document.getElementById('showEditorBtn').style.display = 'none';
+            } else {
+                // Show the "Show Editor" button by default
+                document.getElementById('showEditorBtn').style.display = 'block';
             }
             
             // Mobile menu toggle
