@@ -185,7 +185,7 @@
             border: 2px solid var(--primary-color);
             border-radius: 8px;
             padding: 16px;
-            z-index: 9999;
+            z-index: 99999 !important;
             box-shadow: 0 10px 25px rgba(0,0,0,0.5);
             max-width: 320px;
             max-height: 90vh;
@@ -224,20 +224,6 @@
         .hide-btn {
             background: #6b7280;
             color: white;
-        }
-
-        .show-editor-btn {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            background: var(--primary-color);
-            color: black;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: bold;
-            z-index: 9998;
         }
 
         /* Animations */
@@ -491,12 +477,9 @@
             </div>
         </div>
         
-        <button class="update-btn" onclick="updateSite()">Update Site</button>
-        <button class="update-btn" onclick="saveToGitHub()" style="background: #16a34a; margin-left: 4px;">Save to GitHub</button>
-        <button class="hide-btn" onclick="hideEditor()">Hide</button>
+        <button class="update-btn">Update Site</button>
+        <button class="update-btn" style="background: #16a34a; margin-left: 4px;">Save to GitHub</button>
     </div>
-
-    <button class="show-editor-btn" id="showEditorBtn" onclick="showEditor()">Show Editor</button>
 
     <!-- Navigation -->
     <nav class="bg-black/90 backdrop-blur-md fixed w-full z-50">
@@ -1544,17 +1527,6 @@
     </div>
 
     <script>
-        // Define editor functions in global scope immediately
-        function hideEditor() {
-            document.getElementById('editForm').style.display = 'none';
-            document.getElementById('showEditorBtn').style.display = 'block';
-        }
-
-        function showEditor() {
-            document.getElementById('editForm').style.display = 'block';
-            document.getElementById('showEditorBtn').style.display = 'none';
-        }
-
         // Color preset functions
         function applyColorPreset(preset) {
             const presets = {
@@ -2294,11 +2266,21 @@
             const urlParams = new URLSearchParams(window.location.search);
             if (urlParams.get('edit') === 'true') {
                 document.getElementById('editForm').style.display = 'block';
-                document.getElementById('showEditorBtn').style.display = 'none';
-            } else {
-                // Show the "Show Editor" button by default
-                document.getElementById('showEditorBtn').style.display = 'block';
             }
+            
+            // Set up update site button
+            const updateBtns = document.querySelectorAll('.update-btn');
+            updateBtns.forEach(btn => {
+                if (btn.textContent.includes('Update Site')) {
+                    btn.addEventListener('click', function() {
+                        updateSite();
+                    });
+                } else if (btn.textContent.includes('Save to GitHub')) {
+                    btn.addEventListener('click', function() {
+                        saveToGitHub();
+                    });
+                }
+            });
             
             // Mobile menu toggle
             const mobileMenuButton = document.getElementById('mobile-menu-button');
