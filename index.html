@@ -1569,6 +1569,44 @@
             document.getElementById('sectionBgColor').value = colors.section;
         }
 
+        // Quick Editor Functions - MOVED HERE
+        function updateSite() {
+            const company = document.getElementById('companyName').value || 'ABC ROOFS';
+            const phone = document.getElementById('phoneNum').value || '(623) 555-0123';
+            const email = document.getElementById('emailAddr').value || 'info@abcroofs.com';
+            const location = document.getElementById('locationAddr').value || 'Surprise, Arizona';
+            const address1 = document.getElementById('address1').value || '2401 W Behrend Dr. Suite 33, Phoenix, AZ 85027';
+            const license = document.getElementById('licenseNum').value || 'ROC # CR-42-321606';
+            
+            // Owner information
+            const ownerName = document.getElementById('ownerName').value || 'John Smith';
+            const ownerBio = document.getElementById('ownerBio').value || 'Hi, I\'m John Smith, owner of ABC ROOFS. ABC was founded in 2016 with a simple goal: to provide homeowners with top-quality roofing services rooted in integrity, professionalism, and personal care.';
+            const ownerPhotoUrl = document.getElementById('ownerPhotoUrl').value;
+            
+            // Get color values
+            const accentColor = document.getElementById('accentColor').value || '#3fc138';
+            const bgColor = document.getElementById('bgColor').value || '#000000';
+            const textColor = document.getElementById('textColor').value || '#ffffff';
+            const sectionBgColor = document.getElementById('sectionBgColor').value || '#1a1a1a';
+            
+            // Get logo values
+            const logoUrl = document.getElementById('logoUrl').value || '';
+            
+            // Update text content with all fields
+            updateTextContent(company, phone, email, location, address1, license);
+            
+            // Update owner section
+            updateOwnerSection(ownerName, ownerBio, ownerPhotoUrl);
+            
+            // Apply color changes
+            applyColorScheme(accentColor, bgColor, textColor, sectionBgColor);
+            
+            // Apply logo changes
+            applyLogo(logoUrl);
+            
+            alert('Site updated successfully!');
+        }
+
         // GitHub API functions
 
         // GitHub API functions
