@@ -190,7 +190,6 @@
             max-width: 320px;
             max-height: 90vh;
             overflow-y: auto;
-            display: none;
         }
 
         #editForm input[type="text"], 
@@ -256,7 +255,7 @@
 </head>
 <body>
     <!-- Quick Editor -->
-    <div id="editForm">
+    <div id="editForm" style="display: none;">
         <h3 style="color: var(--primary-color); margin: 0 0 12px 0; font-size: 16px;">Quick Edit</h3>
         
         <!-- Company Details -->
@@ -481,6 +480,13 @@
         <button class="update-btn">Update Site</button>
         <button class="update-btn" style="background: #16a34a; margin-left: 4px;">Save to GitHub</button>
     </div>
+    
+    <!-- Check for edit mode immediately after editor -->
+    <script>
+        if (new URLSearchParams(window.location.search).get('edit') === 'true') {
+            document.getElementById('editForm').style.display = 'block';
+        }
+    </script>
 
     <!-- Navigation -->
     <nav class="bg-black/90 backdrop-blur-md fixed w-full z-50">
@@ -1528,6 +1534,22 @@
     </div>
 
     <script>
+        // Check for edit mode immediately
+        (function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('edit') === 'true') {
+                // Wait for the element to exist, then show it
+                window.addEventListener('load', function() {
+                    const editForm = document.getElementById('editForm');
+                    if (editForm) {
+                        editForm.style.display = 'block';
+                        editForm.style.visibility = 'visible';
+                        editForm.style.opacity = '1';
+                    }
+                });
+            }
+        })();
+
         // Color preset functions
         function applyColorPreset(preset) {
             const presets = {
