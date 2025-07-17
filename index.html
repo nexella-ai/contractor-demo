@@ -190,6 +190,7 @@
             max-width: 320px;
             max-height: 90vh;
             overflow-y: auto;
+            display: none;
         }
 
         #editForm input[type="text"], 
@@ -255,7 +256,7 @@
 </head>
 <body>
     <!-- Quick Editor -->
-    <div id="editForm" style="display: none;">
+    <div id="editForm">
         <h3 style="color: var(--primary-color); margin: 0 0 12px 0; font-size: 16px;">Quick Edit</h3>
         
         <!-- Company Details -->
@@ -2262,10 +2263,22 @@
 
         // Initialize scripts on page load
         document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded, checking for edit mode...');
+            
             // Check URL parameter for edit mode
             const urlParams = new URLSearchParams(window.location.search);
+            console.log('URL params:', window.location.search);
+            console.log('Edit param:', urlParams.get('edit'));
+            
             if (urlParams.get('edit') === 'true') {
-                document.getElementById('editForm').style.display = 'block';
+                console.log('Edit mode detected, showing editor...');
+                const editForm = document.getElementById('editForm');
+                if (editForm) {
+                    editForm.style.display = 'block';
+                    console.log('Editor should be visible now');
+                } else {
+                    console.error('Edit form element not found!');
+                }
             }
             
             // Set up update site button
